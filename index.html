@@ -1,13 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <base href="">
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="description" content="Pardot Website 検証用" />
-  <title>Pardot Website 検証</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>FHのテストです。</title>
+  <link rel="sytles.css">
+  </ling>
+  <title>My Work - Portfolio</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-  Hello World
+  <h1 class="site-title"><a href="index.html"></a></h1>
+  <!-- <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav> -->
+  </header>
+  <main>
+
+  </main>
+  <div id="mainvisual">
+    <picture>
+      <source media="(max-width: 600px)" srcset="img/mainvisual-sp.jpg">
+    </picture>
+  </div>
+
+  <section id="about" class="wrapper">
+    <h2 class="sec-title">About</h2>
+    <p>フォームハンドラのテスト</p>
+  </section>
+
+  <section id="contact" class="wrapper">
+    <h2 class="sec-title">Contact</h2>
+    <form action="https://www.biz.takushimada.work/l/960882/2022-01-20/3sc" method="post">
+      <dl>
+        <dt><label for="namelabel">NAME</label></dt>
+        <dd><input type="text" id="lastname" name="lastname"></dd>
+        <dt><label for="emaillabel">E-mail</label></dt>
+        <dd><input type="email" id="email" name="email"></dd>
+        <dt><label for="messagelabel">MESSAGE</label></dt>
+        <dd><textarea id="message" name="message"></textarea></dd>
+      </dl>
+      <div class="button"><input type="submit" value="送信"></div>
+    </form>
+  </section>
+  </main>
+
+  <footer id="footer">
+    <p>&copy; 2020 My Work</p>
+  </footer>
+  </form>
+  <script type='text/javascript'>
+    piAId = '';
+    piCId = '';
+    piHostname = 'go.pardot.com';
+
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
+        var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+      }
+      if (window.attachEvent) { window.attachEvent('onload', async_load); }
+      else { window.addEventListener('load', async_load, false); }
+    })();
+  </script>
 </body>
 </html>
