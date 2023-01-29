@@ -29,6 +29,10 @@ footer p {
   text-align: center;
 }
 
+indexmain a {
+  text-align: center;
+}
+
 input:required {
   background: #ffcdd2;
 }
