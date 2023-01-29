@@ -5,6 +5,7 @@ header {
   color: #43A047;
 }
 
+
 hr {
   border-width: 3px;
   border-color: #43A047;
@@ -29,7 +30,7 @@ footer p {
   text-align: center;
 }
 
-.indexmain a {
+indexmain {
   text-align: center;
 }
 
