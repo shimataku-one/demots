@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="jp">
 <head>
-  <title>FHtest</title>
+  <title>フォームtest</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
@@ -12,18 +12,19 @@
   <div class="container">
     <header>
       <div class="row">
-        <h1>ShimaTaku 検証ページ</h1>
+        <h1>フォーム検証：フォーム登録</h1>
+        <p><a href="index.html">←戻る</a></p>
       </div>
     </header>
   </div>
 
   <hr>
+
   <div class="container">
-    <indexmain>
-      <p><a href="FHtestpage.html">FHtestページに移動する</a></p>
-      <p><a href="formtestpage.html">iframeフォームに移動する</a></p>
-    </indexmain>
+    <h2>iframeでフォーム挿入</h2>
+<iframe src="https://go.pardot.com/l/960882/2021-12-28/8d" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
   </div>
+<!-- <iframe src="https://go.takushimada.work/l/960882/2022-06-06/2ddns" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe> -->
   <hr>
 
   <div class="container">
@@ -33,7 +34,7 @@
   </div>
   <script type='text/javascript'>
     piAId = '961882';
-    piCId = '';
+    piCId = '35082';
     piHostname = 'go.pardot.com';
 
     (function () {
@@ -46,5 +47,20 @@
       else { window.addEventListener('load', async_load, false); }
     })();
   </script>
+  <!-- <script type='text/javascript'>
+    piAId = '961882';
+    piCId = '';
+    piHostname = 'go.takushimada.work';
+
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
+        var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+      }
+      if (window.attachEvent) { window.attachEvent('onload', async_load); }
+      else { window.addEventListener('load', async_load, false); }
+    })();
+  </script> -->
 </body>
 </html>
