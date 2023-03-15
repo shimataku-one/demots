@@ -2,7 +2,7 @@
 <html lang="jp">
   <head>
     <!-- Google Tag Manager -->
-    <script>
+    <!-- <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -13,8 +13,22 @@
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-KMQBBSF");
-    </script>
+    </script> -->
     <!-- End Google Tag Manager -->
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KQ4219WSEK"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-KQ4219WSEK");
+    </script>
     <script src="main.js"></script>
     <title>FHtest</title>
     <meta charset="UTF-8" />
@@ -45,6 +59,9 @@
       <indexmain>
         <p><a href="FHtestpage.html">FHtestページに移動する</a></p>
         <p><a href="FHtestpage2.html">FHtest2ページに移動する</a></p>
+        <p>
+          <a href="FHtestpage3_GTM.html">FHtestpage3_GTMページに移動する</a>
+        </p>
         <p><a href="formtestpage.html">iframeフォームに移動する</a></p>
       </indexmain>
     </div>
