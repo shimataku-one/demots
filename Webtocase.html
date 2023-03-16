@@ -2,7 +2,22 @@
 <html lang="jp">
   <head>
     <title>WebtoCase</title>
-    <meta charset="UTF-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+      function timestamp() {
+        var response = document.getElementById("g-recaptcha-response");
+        if (response == null || response.value.trim() == "") {
+          var elems = JSON.parse(
+            document.getElementsByName("captcha_settings")[0].value
+          );
+          elems["ts"] = JSON.stringify(new Date().getTime());
+          document.getElementsByName("captcha_settings")[0].value =
+            JSON.stringify(elems);
+        }
+      }
+      setInterval(timestamp, 500);
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -40,7 +55,7 @@
 
     <div class="container">
       <form
-        action="https://go.takushimada.work/l/960882/2023-03-16/4py3t"
+        action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8"
         method="post"
       >
         <input
