@@ -15,6 +15,29 @@
       type="text/css"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
+    <script type="text/javascript">
+      piAId = "961882";
+      piCId = "127094";
+      piHostname = "pi.pardot.com";
+
+      (function () {
+        function async_load() {
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src =
+            ("https:" == document.location.protocol
+              ? "https://pi"
+              : "http://cdn") + ".pardot.com/pd.js";
+          var c = document.getElementsByTagName("script")[0];
+          c.parentNode.insertBefore(s, c);
+        }
+        if (window.attachEvent) {
+          window.attachEvent("onload", async_load);
+        } else {
+          window.addEventListener("load", async_load, false);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div class="container">
@@ -110,7 +133,7 @@
         <p>&copy; ShimaTaku.</p>
       </footer>
     </div>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       piAId = "961882";
       piCId = "127094";
       piHostname = "pi.pardot.com";
@@ -132,6 +155,6 @@
           window.addEventListener("load", async_load, false);
         }
       })();
-    </script>
+    </script> -->
   </body>
 </html>
