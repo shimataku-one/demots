@@ -52,5 +52,8 @@ input:focus {
 #pi_tracking_opt_in_yes {
 font-size:0;
 }
-#pi_tracking_opt_in_yes:before
-{font-size: 12px; content: "かきくけこ";}
+
+#pi_tracking_opt_in_yes:before{
+  font-size: 20px;
+  content: "同意します";
+}
