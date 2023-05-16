@@ -48,3 +48,9 @@ input:valid {
 input:focus {
   background: #dcedc8;
 }
+
+#pi_tracking_opt_in_div {
+font-size:0;
+}
+#pi_tracking_opt_in_div:before
+{font-size: 12px; content: "かきくけこ";}
