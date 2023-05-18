@@ -53,10 +53,10 @@ input:focus {
 font-size:0;
 }
 
-#pi_tracking_opt_in_yes:before{
+#pi_tracking_opt_in_yes{
   font-size: 0px;
 }
-#pi_tracking_opt_in_yes:after{
+#pi_tracking_opt_in_yes:before{
   font-size: 20px;
   content: "同意します";
 }
