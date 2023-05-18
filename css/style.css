@@ -54,6 +54,14 @@ font-size:0;
 }
 
 #pi_tracking_opt_in_yes:before{
+  font-size: 0px;
+}
+#pi_tracking_opt_in_yes:after{
   font-size: 20px;
   content: "同意します";
+}
+
+#pi_tracking_opt_in_no:before{
+  font-size: 20px;
+  content: "同意しません";
 }
