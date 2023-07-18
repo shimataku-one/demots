@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <title>フォームtest</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">
+        <h1>フォーム検証：フォーム登録</h1>
+        <p><a href="index.html">←戻る</a></p>
+      </div>
+    </header>
+  </div>
+
+  <hr />
+
+  <div class="container">
+    <h2>iframeでフォーム挿入</h2>
+    <p><a href="https://go.takushimada.work/l/960882/2021-12-28/8d">フォームへ移動する</a></p>
+    <hr />
+
+    <div class="container">
+      <footer>
+        <p>&copy; ShimaTaku.</p>
+      </footer>
+    </div>
+    <script type="text/javascript">
+      piAId = "961882";
+      piCId = "125171";
+      piHostname = "go.takushimada.work";
+
+      (function () {
+        function async_load() {
+          var s = document.createElement("script");
+          s.type = "text/javascript";
+          s.src =
+            ("https:" == document.location.protocol ? "https://" : "http://") +
+            piHostname +
+            "/pd.js";
+          var c = document.getElementsByTagName("script")[0];
+          c.parentNode.insertBefore(s, c);
+        }
+        if (window.attachEvent) {
+          window.attachEvent("onload", async_load);
+        } else {
+          window.addEventListener("load", async_load, false);
+        }
+      })();
+    </script>
+    <!-- <script type='text/javascript'>
+    piAId = '961882';
+    piCId = '';
+    piHostname = 'go.takushimada.work';
+
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
+        var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+      }
+      if (window.attachEvent) { window.attachEvent('onload', async_load); }
+      else { window.addEventListener('load', async_load, false); }
+    })();
+  </script> -->
+</body>
+</html>
