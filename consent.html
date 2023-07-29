@@ -1,0 +1,39 @@
+<!-- Embed the Account Engagement analytics library -->
+<script type='text/javascript'>
+  var piDomain = 'go.takushimada.work';
+
+  (function () {
+    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//' + piDomain + '/pdt.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+    window['pdt'] = window['pdt'] || function () { (window['pdt'].cq = window['pdt'].cq || []).push(arguments); };
+  })();
+
+  // Creating an analytics tracker requires the following:
+  // pdt('create', <pardot account id + 1000>, <pardot campaign id + 1000>, 'go.example.com');
+  pdt('create', 961882, 99074, piDomain);
+</script>
+<!-- End embed Account Engagement analytics -->
+
+<!-- example menu navigation -->
+<a href="/home" class="navigation-link">Home</a>
+<a href="/about" class="navigation-link">About</a>
+<!-- end example menu navigation -->
+
+<!-- your page content -->
+
+<script>
+  (function () {
+    // Update the tracked page title and send a page view to Account Engagement
+    function trackView(pageTitle) {
+      pdt('set', 'title', pageTitle);
+      pdt('sendPageView');
+    }
+
+    // Add event listeners for clicks on navigation links
+    // Clicks on these links will send page views to Account Engagement
+    let navLinks = document.getElementsByClassName('navigation-link');
+    for (let i = 0; i < navLinks.length; i++) {
+      navLinks[i].addEventListener('click', trackView(navLinks[i].text), false);
+    }
+  })();
+</script>
