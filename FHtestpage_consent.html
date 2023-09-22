@@ -133,11 +133,34 @@
     });
     console.log('5');
     pdt('set', 'title', 'こんちくは！');
-    pdt('set', 'url', 'https://gogo.takushimada.work/');
+    // pdt('set', 'url', 'https://gogo.takushimada.work/');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
     pdt('sendPageView');
 
+  </script>
+  <!-- example menu navigation -->
+  <a href="https://gogo.takushimada.work/" class="navigation-link">Homeへ戻る</a>
+  <a href="https://gogo.takushimada.work/" class="navigation-link">Aboutなんてない</a>
+  <!-- end example menu navigation -->
+
+  <!-- your page content -->
+
+  <script>
+    (function () {
+      // Update the tracked page title and send a page view to Account Engagement
+      function trackView(pageTitle) {
+        pdt('set', 'title', pageTitle);
+        pdt('sendPageView');
+      }
+
+      // Add event listeners for clicks on navigation links
+      // Clicks on these links will send page views to Account Engagement
+      let navLinks = document.getElementsByClassName('navigation-link');
+      for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', trackView(navLinks[i].text), false);
+      }
+    })();
   </script>
 
 
