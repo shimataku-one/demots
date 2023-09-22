@@ -118,7 +118,8 @@
     // pdt('create', Account Engagement account ID + 1000, Account Engagement campaign ID + 1000, 'go.example.com');
     console.log(piAId, piCId, piDomain);
     pdt('create', piAId, piCId, piDomain);
-    pdt("showConsentBanner");
+    //pdt("showConsentBanner");
+    pdt("setOptIn", true);
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
