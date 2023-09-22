@@ -126,6 +126,10 @@
     pdt('create', piAId, piCId, piDomain);
     //pdt("showConsentBanner");
     pdt("setOptIn", true);
+    pdt(function (tracker) {
+      let status = tracker.getConsentStatus();
+      console.log(status)
+    });
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
