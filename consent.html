@@ -1,7 +1,8 @@
 <!-- Embed the Account Engagement analytics library -->
 <script type='text/javascript'>
   var piDomain = 'go.takushimada.work';
-
+  var piAId = 961882;
+  var piCId = 82151;
   (function () {
     var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//' + piDomain + '/pdt.js';
     var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
@@ -10,12 +11,12 @@
 
   // Creating an analytics tracker requires the following:
   // pdt('create', <pardot account id + 1000>, <pardot campaign id + 1000>, 'go.example.com');
-  pdt('create', 961882, 99074, piDomain);
+  pdt('create', piAId, piCId, piDomain);
 </script>
 <!-- End embed Account Engagement analytics -->
 
 <!-- example menu navigation -->
-<a href="/home" class="navigation-link">Home</a>
+<a href="/home" class="navigation-link">Clear</a>
 <a href="/about" class="navigation-link">About</a>
 <!-- end example menu navigation -->
 
