@@ -94,13 +94,14 @@
 
   <div class="container">
     <footer>
+      <p>
       <button type="button" id="show_banner_button" onClick="pdt('showConsentBanner')">
         Cookie Consent Settings
       </button>
       <button type="button" id="cookie_clear_button" onClick="pdt('clearTrackingCookies')">
         Cookie Clear
       </button>
-      <p>&copy; ShimaTaku.</p>
+      &copy; ShimaTaku.</p>
     </footer>
   </div>
 
@@ -131,7 +132,7 @@
       let url = tracker.get("url");
       console.log(status, url);
     });
-    console.log('5');
+    console.log('6');
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'url', 'https://gogo.takushimada.work/');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
