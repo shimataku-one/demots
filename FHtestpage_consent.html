@@ -128,7 +128,8 @@
     pdt("setOptIn", true);
     pdt(function (tracker) {
       let status = tracker.getConsentStatus();
-      console.log(status)
+      let url = tracker.get("url");
+      console.log(status, url);
     });
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
