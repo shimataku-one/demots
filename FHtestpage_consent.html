@@ -94,14 +94,6 @@
 
   <div class="container">
     <footer>
-      <button type="button" id="show_banner_button" onClick="pdt('showConsentBanner')">
-        Cookie Consent Settings
-      </button>
-      <br>
-      <!-- example menu navigation -->
-      <a href="https://gogo.takushimada.work/index.html" class="navigation-link">Homeへ戻る</a>
-      <a href="https://gogo.takushimada.work/index.html" class="navigation-link">Aboutへは行かない</a>
-      <!-- end example menu navigation -->
       <p>&copy; ShimaTaku.</p>
     </footer>
   </div>
@@ -129,24 +121,6 @@
     pdt('set', 'title', 'aaaaaaa');
     pdt('sendPageView');
 
-  </script>
-
-
-  <script>
-    (function () {
-      // Update the tracked page title and send a page view to Account Engagement
-      function trackView(pageTitle) {
-        pdt('set', 'title', pageTitle);
-        pdt('sendPageView');
-      }
-
-      // Add event listeners for clicks on navigation links
-      // Clicks on these links will send page views to Account Engagement
-      let navLinks = document.getElementsByClassName('navigation-link');
-      for (let i = 0; i < navLinks.length; i++) {
-        navLinks[i].addEventListener('click', trackView(navLinks[i].text), false);
-      }
-    })();
   </script>
 
 
