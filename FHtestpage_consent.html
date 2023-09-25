@@ -101,6 +101,7 @@
       <button type="button" id="cookie_clear_button" onClick="pdt('clearTrackingCookies')">
         Cookie Clear
       </button>
+      <br>
       &copy; ShimaTaku.</p>
     </footer>
   </div>
@@ -126,7 +127,7 @@
     console.log(piAId, piCId, piDomain);
     pdt('create', piAId, piCId, piDomain);
     //pdt("showConsentBanner");
-    pdt("setOptIn", true);
+    // pdt("setOptIn", true);
     pdt(function (tracker) {
       let status = tracker.getConsentStatus();
       let url = tracker.get("url");
