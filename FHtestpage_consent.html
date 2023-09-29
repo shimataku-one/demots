@@ -101,6 +101,9 @@
       <button type="button" id="cookie_clear_button" onClick="pdt('clearTrackingCookies')">
         Cookie Clear
       </button>
+            <button type="button" id="revokeConsent_button" onClick="pdt('revokeConsent')">
+              revokeConsent
+            </button>
       <br>
       &copy; ShimaTaku.</p>
     </footer>
@@ -128,18 +131,27 @@
     pdt('create', piAId, piCId, piDomain);
     //pdt("showConsentBanner");
     // pdt("setOptIn", true);
+
+    // Getを使ってみよう！
     pdt(function (tracker) {
       let status = tracker.getConsentStatus();
       let url = tracker.get("url");
-      console.log(status, url);
+      let referrer = tracker.get("referrer");
+      let piEmail = tracker.get("piEmail");
+      let utmCampaign = tracker.get("utmCampaign");
+      console.log(status, url, referrer, piEmail, utmCampaign);
     });
-    console.log('6');
+    console.log('7');
+
+    // Setを使ってみよう！
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'url', 'https://gogo.takushimada.work/');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
     pdt('sendPageView');
 
+
+    // SPAなど。クリックをトリガーにPageViewを記録
   </script>
   <!-- example menu navigation -->
   <a href="https://gogo.takushimada.work/" class="navigation-link">Homeへ戻る</a>
