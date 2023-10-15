@@ -147,8 +147,9 @@
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
     pdt(function (tracker) {
-      let title = tracker.get("title");
-      console.log(title, url);
+      let gettitle = tracker.get("title");
+      let geturl = tracker.get("url");
+      console.log(gettitle, geturl);
     });
     // ページビューの送信
     // pdt('sendPageView');
@@ -176,7 +177,7 @@
       let navLinks = document.getElementsByClassName('navigation-link');
       for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', trackView(navLinks[i].text), false);
-        console.log("clickしました");
+        console.log("addEventしました");
       }
     })();
   </script>
