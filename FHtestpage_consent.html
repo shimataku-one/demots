@@ -101,16 +101,13 @@
       <button type="button" id="cookie_clear_button" onClick="pdt('clearTrackingCookies')">
         Cookie Clear
       </button>
-            <button type="button" id="revokeConsent_button" onClick="pdt('revokeConsent')">
-              revokeConsent
-            </button>
+      <button type="button" id="revokeConsent_button" onClick="pdt('revokeConsent')">
+        revokeConsent
+      </button>
       <br>
       &copy; ShimaTaku.</p>
     </footer>
   </div>
-
-  <!-- piAId = '961882'; -->
-  <!-- piCId = '82151'; -->
 
   <script>
     var piDomain = 'go.takushimada.work'; // format of 'go.example.com'
@@ -127,7 +124,6 @@
 
     // Create an analytics tracker with the required information:
     // pdt('create', Account Engagement account ID + 1000, Account Engagement campaign ID + 1000, 'go.example.com');
-    console.log(piAId, piCId, piDomain);
     pdt('create', piAId, piCId, piDomain);
     //pdt("showConsentBanner");
     // pdt("setOptIn", true);
@@ -141,16 +137,19 @@
       let utmCampaign = tracker.get("utmCampaign");
       console.log(status, url, referrer, piEmail, utmCampaign);
     });
-    console.log('8');
+    console.log('1');
 
     // Setを使ってみよう！
     pdt('set', 'title', 'こんちくは！');
     // pdt('set', 'url', 'https://gogo.takushimada.work/');
     // pdt('set', 'piEmail', 'consentapi5@test.com');
     // pdt('set', 'piPoints', 500000);
-
-    // ロードでページビュー
-    // pdt('sendPageView');
+    pdt(function (tracker) {
+      let title = tracker.get("title");
+      console.log(title);
+    });
+    // ページビューの送信
+    pdt('sendPageView');
 
 
     // SPAなど。クリックをトリガーにPageViewを記録
