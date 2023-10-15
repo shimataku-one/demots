@@ -12,7 +12,7 @@
   <div class="container">
     <header>
       <div class="row">
-        <h1>Tracking&ConsentAPI検証</h1>
+        <h1 id="titleh1">Tracking&ConsentAPI検証</h1>
         <p><a href="index.html">←戻る</a></p>
       </div>
     </header>
@@ -137,7 +137,7 @@
       let utmCampaign = tracker.get("utmCampaign");
       console.log(status, url, referrer, piEmail, utmCampaign);
     });
-    console.log('1');
+    console.log('2');
 
     // Setを使ってみよう！
     pdt('set', 'title', 'こんちくは！');
@@ -155,7 +155,7 @@
     // SPAなど。クリックをトリガーにPageViewを記録
   </script>
   <!-- example menu navigation -->
-  <a href="#h1" class="navigation-link">Homeへ戻る</a>
+  <a href="#titleh1" class="navigation-link">Homeへ戻る</a>
   <a href="https://gogo.takushimada.work/" class="navigation-link">Aboutなんてない</a>
   <!-- end example menu navigation -->
 
