@@ -137,8 +137,8 @@
     // Create an analytics tracker with the required information:
     // pdt('create', Account Engagement account ID + 1000, Account Engagement campaign ID + 1000, 'go.example.com');
     pdt('create', piAId, piCId, piDomain);
-    //pdt("showConsentBanner");
-    pdt("setOptIn", true);
+    // pdt("showConsentBanner");
+    // pdt("setOptIn", true);
 
     // Getを使ってみよう！
     pdt(function (tracker) {
@@ -164,7 +164,7 @@
       console.log(gettitle, geturl);
     });
     // ページビューの送信
-    // pdt('sendPageView');
+    pdt('sendPageView');
 
 
     // SPAなど。クリックをトリガーにPageViewを記録
