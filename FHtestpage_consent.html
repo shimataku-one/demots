@@ -107,6 +107,7 @@
       <button type="button" id="sendPageView_button" onClick="pdt('sendPageView')">
         sendPageView
       </button>
+      // SPA的な。例：一覧コンテンツ→詳細コンテンツ
       <button type="button" id="setUrlView_button" onClick="pdt('set', 'url', 'https://settest.takushimada.work/'),pdt('set', 'title', 'たいとる')">
         SetURL
       </button>
@@ -135,7 +136,7 @@
     // pdt('create', Account Engagement account ID + 1000, Account Engagement campaign ID + 1000, 'go.example.com');
     pdt('create', piAId, piCId, piDomain);
     //pdt("showConsentBanner");
-    // pdt("setOptIn", true);
+    pdt("setOptIn", true);
 
     // Getを使ってみよう！
     pdt(function (tracker) {
