@@ -1,0 +1,5 @@
+CustomerID,Name,Email,Area
+001,dcname1,taku.shimada+dcname1@salesforce.com,tokyo
+002,dcname2,taku.shimada+dcname2@salesforce.com,okinawa
+003,dcname3,taku.shimada+dcname3@salesforce.com,saitama
+004,dcname4,taku.shimada+dcname4@salesforce.com,osaka
