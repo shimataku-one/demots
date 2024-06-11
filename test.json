@@ -1,1 +1,0 @@
-{ "properties": { "Number": { "type": "number", "title": "数値", "value": "" } }, "view": { "components": [ { "definition": "lightning/control", "scope": "#/properties/Number" } ] }, "required": [] }
