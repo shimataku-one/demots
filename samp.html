@@ -1,0 +1,917 @@
+<form accept-charset="UTF-8" method="post" action="https://info.led-tokyo.co.jp/l/868321/2024-08-29/c1lfp3">
+  <div class="p-mv--form__row">
+    <div class="p-mv--form__label -required">会社名</div>
+    <div class="p-mv--form__body">
+      <input type="text" name="company_name" v-model="mvInput.company_name" id="company_name" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" placeholder="例）LED TOKYO 株式会社">
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'company_name').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('company_name', mverrors)">{{item.message}}</p>
+      </template>
+    </div>
+  </div>
+  <div class="p-mv--form__row">
+    <div class="p-mv--form__label -required">担当者名</div>
+    <div class="p-mv--form__body">
+      <div class="p-mv--form__name">
+        <input type="text" name="last_name" v-model="mvInput.last_name" id="last_name" value="" class="text" size="30" maxlength="80" onchange="" onfocus="" placeholder="例）山田">
+        <input type="text" name="first_name" v-model="mvInput.first_name" id="first_name" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" placeholder="例）太郎">
+      </div>
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'last_name').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('last_name', mverrors)">{{item.message}}</p>
+      </template>
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'first_name').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('first_name', mverrors)">{{item.message}}</p>
+      </template>
+    </div>
+  </div>
+  <div class="p-mv--form__row">
+    <div class="p-mv--form__label -required">電話番号</div>
+    <div class="p-mv--form__body">
+      <input type="text" name="tel" v-model="mvInput.tel" id="tel" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" placeholder="例）03-6804-5393">
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'tel').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('tel', mverrors)">{{item.message}}</p>
+      </template>
+    </div>
+  </div>
+  <div class="p-mv--form__row">
+    <div class="p-mv--form__label -required">メールアドレス</div>
+    <div class="p-mv--form__body">
+      <input type="text" name="email" v-model="mvInput.email" id="email" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" placeholder="例）led.tokyo@led-tokyo.co.jp">
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'email').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('email', mverrors)">{{item.message}}</p>
+      </template>
+    </div>
+  </div>
+  <div class="p-mv--form__row">
+    <div class="p-mv--form__label -required">問い合わせ</div>
+    <div class="p-mv--form__body">
+      <textarea name="message" v-model="mvInput.message" id="message" onchange="" cols="40" rows="4" class="standard"></textarea>
+      <template v-if="isMbValid && mverrors.filter(item => item.value == 'message').length > 0">
+        <p class="p-mv--form__error" v-for="item in errorFilter('message', mverrors)">{{item.message}}</p>
+      </template>
+    </div>
+  </div>
+  <div class="p-mv--form__privacy">
+    <label>
+      <input type="checkbox" name="PrivacyPolicy" id="PrivacyPolicy" v-model="mvInput.PrivacyPolicy" value="1" onchange="">
+      <span><a href="https://led.led-tokyo.co.jp/privacy-policy/" target="_blank" rel="nooperner">プライバシーポリシー</a>に同意する</span>
+    </label>
+  </div>
+  <template v-if="isMbValid && mverrors.filter(item => item.value == 'PrivacyPolicy').length > 0">
+    <p class="p-mv--form__error" v-for="item in errorFilter('PrivacyPolicy', mverrors)">{{item.message}}</p>
+  </template>
+  <button class="p-mv--form__submit c-btn c-btn--blue" @click="handleMbSubmit">上記内容で送信する</button>
+  <input type="hidden" id="yclid_field" name="yclid_field" value="">
+  <input type="hidden" id="msclid_field" name="msclid_field" value="">
+  <input type="hidden" id="gclid_field" name="gclid_field" value="">
+  <input type="hidden" id="fbclid_field" name="fbclid_field" value="">
+</form>
+</div>
+
+<!-- <div class="p-mv--form">
+	<div class="p-mv--iframe">
+	<iframe src="https://info.led-tokyo.co.jp/l/868321/2023-05-30/br3tc4" width="100%" height="585" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" title="form-upper" id="form-feature-simple"></iframe>
+	</div>
+	</div> -->
+</div>
+
+<!--/mv-->
+<div class="l-wrapper">
+  <div class="p-fixed-contact">
+    <a href="#conform"><img src="images/fixed-contact.webp" alt="お問い合わせ お気軽にご質問ご相談ください"></a>
+  </div>
+
+  <!--section01-->
+  <section class="p-intro js-bgchk">
+    <div class="p-intro--medals">
+      <div class="p-intro--medals__item">
+        <picture><img src="images/intro-img02.webp" alt="No.1" decoding="async"></picture>
+        <h2 class="p-intro--title">
+	<span class="p-intro--line">常設サイネージ</span>
+	<span class="-flex">導入面積シェア2年連続<span class="p-intro--bgwhite u-eng">No.1</span></span>
+	</h2>
+      </div>
+    </div>
+    <p>日本全国のイベント・展示会に加え、ドームやアリーナでのアーティストライブ、<br>テレビやミュージックビデオ、CM撮影など実績多数！</p>
+    <div class="p-intro--notice">
+      <ul>
+        <li>2022年度・2023年度_常設サイネージ用途市場調査　調査機関：富士キメラ総研推定</li>
+      </ul>
+    </div>
+    <div class="p-intro---logos">
+      <div class="p-intro--slider">
+        <ul class="slider01">
+          <li class="slide">
+            <img src="images/logo01.webp" alt="ラルフローレン" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo02.webp" alt="TBS" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo03.webp" alt="テレビ朝日映像" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo04.webp" alt="SHORTSHORTS" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo05.webp" alt="世界新体操" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo06.webp" alt="静岡新聞" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo07.webp" alt="ドトール" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo08.webp" alt="JVCJVCKENWOOD" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+        </ul>
+      </div>
+      <div class="p-intro--slider">
+        <ul class="slider02">
+          <li class="slide">
+            <img src="images/logo09.webp" alt="りらく" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo10.webp" alt="大林組" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo11.webp" alt="双日建材株式会社 " width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo12.webp" alt="山形パナソニック株式会社" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo13.webp" alt="RIZIN" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo14.webp" alt="慶應義塾大学" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo15.webp" alt="東京大学" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo16.webp" alt="SHIBUYA109" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+          <li class="slide">
+            <img src="images/logo17.webp" alt="全能" width="240" height="110" decoding="async" loading="lazy">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!--/section01-->
+
+  <!--section02-->
+  <!-- <section class="p-products">
+	<div class="p-products__inner">
+	<h3 class="c-title">製品ラインナップ</h3>
+	<div class="p-products--list">
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img01.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">屋外用LEDビジョン</h4>
+	<p class="p-products--list__sub">OUTSIDE LED VISION</p>
+	</div>
+	</a>
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img02.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">屋内用LEDビジョン</h4>
+	<p class="p-products--list__sub">INSIDE LED VISION</p>
+	</div>
+	</a>
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img03.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">床用LEDビジョン</h4>
+	<p class="p-products--list__sub">LED VISION for FLOORS</p>
+	</div>
+	</a>
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img04.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">ウィンドウビジョン</h4>
+	<p class="p-products--list__sub">WINDOWVISION</p>
+	</div>
+	</a>
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img05.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">液晶ディスプレイ</h4>
+	<p class="p-products--list__sub">LCD DISPLAY</p>
+	</div>
+	</a>
+	<a href="#" class="p-products--list__item">
+	<figure class="p-products--list__image"><img src="images/products-img06.webp" alt=""></figure>
+	<div class="p-products--list__content">
+	<h4 class="p-products--list__title">その他機材</h4>
+	<p class="p-products--list__sub">OTHER</p>
+	</div>
+	</a>
+	</div>
+	</div>
+	</section> -->
+  <!--section02-->
+
+  <!--section03-->
+  <section class="p-outline">
+    <div class="p-outline__inner">
+      <h3 class="c-title">デジタルサイネージについて</h3>
+      <h4 class="p-outline--title"><span>デジタルサイネージとは？</span></h4>
+      <div class="p-outline--block01">
+        <div class="p-outline--block01__desc">
+          <p>デジタルサイネージとは公共空間や交通機関等の様々な場所で広告プロモーション等に利用されるLEDビジョン・液晶ディスプレイ等の映像表示機器を用いた「電子看板」を指します。</p>
+          <p>デジタルサイネージは通常の紙ポスター・看板とは違い、映像データをクラウド上での管理・運用を可能としているため、集客や訴求力のある映像を適宜・迅速に配信できるほか、情報更新の頻度が高いシチュエーションにも張り替え作業による工数削減やコスト削減が期待できます。</p>
+        </div>
+        <figure class="p-outline--block01__pic">
+          <img src="images/outline-img01.webp" alt="効果的な映像配信、適宜・迅速な映像管理、工数・コスト削減の3つの利点の図" width="468" height="468" decoding="async" loading="lazy">
+      </div>
+
+      <h4 class="p-outline--title"><span>映像配信の仕組み</span></h4>
+      <p>デジタルサイネージの映像配信方法は導入シーンや用途、コストによって様々ですが大きく2つに分類されます。<br>
+	・ネットワークを通じて複数同時配信・運用管理が可能な<strong>「ネットワーク型」</strong><br>
+	・ローカル環境でUSBメモリーやSDカードを使用する<strong>「スタンドアロン型」</strong></p>
+      <p>またネットワーク型からさらに2つ分けられます。<br>
+	・インターネットを利用する<strong>「クラウド型」</strong><br>
+	・自社ネットワークを利用する<strong>「自社管理サーバー型」</strong></p>
+      <p>お客様の導入シーンや用途、コストから最適な映像配信方法をご提案させていただきます。</p>
+
+      <div class="p-outline--imageblock01">
+        <p><strong>「ネットワーク型」</strong></p>
+        <div class="p-outline--imagecolumn">
+          <figure>
+            <figcaption>クラウド型デジタルサイネージ</figcaption>
+            <img src="images/outline-img02.webp" alt="" width="520" height="250" decoding="async" loading="lazy">
+          </figure>
+          <figure>
+            <figcaption>自社管理サーバー型サイネージ</figcaption>
+            <img src="images/outline-img03.webp" alt="" width="520" height="250" decoding="async" loading="lazy">
+          </figure>
+        </div>
+      </div>
+      <div class="p-outline--imageblock02">
+        <p><strong>「スタンドアロン型」</strong></p>
+        <figure>
+          <figcaption>スタンドアロン型サイネージ</figcaption>
+          <img src="images/outline-img04.webp" alt="" width="406" height="230" decoding="async" loading="lazy">
+        </figure>
+      </div>
+
+      <h4 class="p-outline--title"><span>デジタルサイネージの活用シーン</span></h4>
+      <div class="p-outline--usage">
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=shop#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img01.webp" alt="商業施設" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>商業施設</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=goraku#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img02.webp" alt="娯楽・興業" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>娯楽・興業</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=hotel#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img03.webp" alt="ホテル" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>ホテル</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=health#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img04.webp" alt="ヘルスケア" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>ヘルスケア</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=exhibition&scene%5B%5D=event#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img05.webp" alt="展示会・イベント" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>展示会・イベント</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=sports#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img06.webp" alt="スポーツ" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>スポーツ</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=media#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img07.webp" alt="メディア" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>メディア</h5>
+        </a>
+        <a class="p-outline--usage__item" href="https://led.led-tokyo.co.jp/works/?scene%5B%5D=office#result" target="_blank" rel="noopener">
+          <picture><img src="images/outline-usage-img08.webp" alt="オフィス" width="258" height="168" decoding="async" loading="lazy"></picture>
+          <h5>オフィス</h5>
+        </a>
+      </div>
+      <a class="c-viewmore" href="https://led.led-tokyo.co.jp/products/" target="_blank" rel="noopener" aria-label="Circle Link">
+        <span>製品ラインナップはこちら</span>
+        <div class="c-viewmore__svg">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" aria-hidden="true">
+            <circle cx="30" cy="30" r="30"></circle>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+  <!--section03-->
+
+  <!--section04-->
+  <section class="p-worries">
+    <div class="p-worries__inner">
+      <h3 class="c-title">こんな
+	<span class="c-title--bgwhite">お悩み</span>も
+	<span class="c-title--small">LEDTOKYOなら全て解決します</span>
+	</h3>
+      <div class="p-worries--card">
+        <div class="p-card">
+          <div class="p-card--back">
+            <p>
+	<img src="images/mv_logo.svg" alt="LEDTOKYO" width="156" height="76" decoding="async" loading="lazy">
+	</p>
+          </div>
+          <div class="p-card--front">
+            <p class="p-card--title">
+	<span>レンタル</span>の場合
+	</p>
+            <picture class="p-card--pic">
+              <img src="images/worries_img01.webp" alt="RENTALの場合" width="388" height="260" decoding="async" loading="lazy">
+            </picture>
+            <ul>
+              <li>１～２日だけレンタルしたい</li>
+              <li>直近で利用する機会ができた</li>
+              <li>イベントで数日間利用したい</li>
+              <li>設置場所が遠方で困っている</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card--back">
+            <p>
+	<img src="images/mv_logo.svg" alt="LEDTOKYO" width="156" height="76" decoding="async" loading="lazy">
+	</p>
+          </div>
+          <div class="p-card--front">
+            <p class="p-card--title">
+	<span>ご購入</span>の場合
+	</p>
+            <picture class="p-card--pic">
+              <img src="images/worries_img02.webp" alt="ご購入の場合" width="388" height="260" decoding="async" loading="lazy">
+            </picture>
+            <ul>
+              <li>目的に適した製品を知りたい</li>
+              <li>サイネージとして利用したい</li>
+              <li>導入後のメンテナンスが不安</li>
+              <li>設置・施工も併せて任せたい</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-worries--closing">
+        <p>導入から設置・撤収、保守点検まで
+	<span>ワンストップ</span>でご提供。
+	<br>
+	<span class="u-bgorange">全国対応</span>でお客様に
+	<span>最適</span>な
+	<span>ソリューション</span>をご提案、
+	<br>LEDのプロフェッショナルが
+	<span>トータルサポート</span>させて頂きます。
+	</p>
+      </div>
+    </div>
+  </section>
+  <!--section04-->
+
+  <!--section05-->
+  <section class="p-strongpoint">
+    <div class="p-strongpoint__inner">
+      <h3 class="c-title">LED TOKYOの強み</h3>
+      <div class="p-strongpoint--image">
+        <picture>
+          <source srcset="images/strongpoint-img01_sp.webp" media="(max-width: 767px)" />
+          <img src="images/strongpoint-img01.webp" alt="【国内在庫保有数業界最多クラス】【導入企業数6,000社以上導入台数50,000台以上】【保証期間業界最長クラス3年保証】" width="1076" height="605" decoding="async" loading="lazy">
+        </picture>
+      </div>
+    </div>
+  </section>
+  <!--section05-->
+
+  <!--CTA-->
+  <div class="c-cta">
+    <div class="c-cta--title">
+      <h3>お気軽にご質問・ご相談ください</h3>
+      <p>まだ詳細が決まっていなくても大丈夫です。導入相談も無料で承っております。<br>どんなイベントにでも最適なプランをご提案させていただきます。</p>
+    </div>
+    <div class="c-cta--btns">
+      <a href="https://led.led-tokyo.co.jp/catalogue/" target="_blank" class="c-btn c-btn--black c-icon--download">カタログダウンロード </a>
+      <a href="#conform" class="c-btn c-btn--white c-icon--mail">お問い合わせ </a>
+    </div>
+  </div>
+  <!--/CTA-->
+
+  <!--section06-->
+  <section class="p-voices">
+    <div class="p-voices__inner">
+      <h3 class="p-voices--title">
+	<span class="u-eng">VOICES</span>お客様の声
+	</h3>
+      <div class="p-voices--list">
+        <!--voice01-->
+        <div class="p-voices--box">
+          <div class="p-voices--pic">
+            <picture>
+              <img src="images/voices-img01.webp" alt="株式会社カプコン" width="574" height="385" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="p-voices--text">
+            <div class="p-voices--company">
+              <p>株式会社カプコン</p>
+            </div>
+            <h4>一番の決め手は導入費用の<strong>”安さ”</strong>でした</h4>
+            <p>導入コストが高いというイメージを持ってましたが、導入コストを抑える提案を頂けて導入への抵抗感を無くしてくれました。導入するにあたってショールームを見学させてもらい、施工方法・設置後の使用方法の説明も丁寧に案内して下さったので安心できました。</p>
+            <div class="p-voices--product">
+              <span>導入製品</span>
+              <p>LEDビジョン（屋内用）</p>
+            </div>
+          </div>
+        </div>
+        <!--voices02-->
+        <div class="p-voices--box">
+          <div class="p-voices--pic">
+            <picture>
+              <img src="images/voices-img02.webp" alt="株式会社ワークスワークス" width="574" height="385" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="p-voices--text">
+            <div class="p-voices--company">
+              <p>株式会社ワークスワークス</p>
+            </div>
+            <h4>最後の決め手はLEDビジョンの<strong>”迫力”</strong></h4>
+            <p>当初重要視していたのは導入コストでしたが、最終的に決定に至ったのはショールームに伺った際に目の当たりにしたLEDビジョンの”迫力”でした。また、金額面でも他社さんと比べると倍近い違いがあったり、弊社の要望を汲んで製品を提案してくださった所も大きかったですね。</p>
+            <div class="p-voices--product">
+              <span>導入製品</span>
+              <p>LEDビジョン（屋内用）/ IWB</p>
+            </div>
+          </div>
+        </div>
+        <!--voices03-->
+        <div class="p-voices--box">
+          <div class="p-voices--pic">
+            <picture>
+              <img src="images/voices-img03.webp" alt="Chatwork株式会社" width="574" height="385" decoding="async" loading="lazy">
+            </picture>
+          </div>
+          <div class="p-voices--text">
+            <div class="p-voices--company">
+              <p>Chatwork株式会社</p>
+            </div>
+            <h4>多数の実績を積まれている<strong>”安心感”</strong></h4>
+            <p>問い合わせをしてからショールームを見学させてもらい、実機を見た際に自分たちで持っている機材が使用できることを確認していただけたり実際に設置する場所の搬入から設置までの課題を一緒になってクリアしてくれました。この安心感から導入への不安は全くなかったです。</p>
+            <div class="p-voices--product">
+              <span>導入製品</span>
+              <p>LEDビジョン（屋内用）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/section06-->
+
+  <!--section07-->
+  <section>
+    <div class="p-exam">
+      <div class="p-exam--title">
+        <h3 class="c-title">活用事例</h3>
+        <p>ライブコンサート、ミュージックビデオやCM撮影、展示会、セミナー、スポーツイベント様々な実績があります。
+	<br>規模の大小、または設置環境や用途問わず対応可能。
+	</p>
+      </div>
+      <div class="splide">
+        <div class="splide__track">
+          <div class="splide__list p-exam--slider">
+            <!--slider01-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>JAPAN RECORD
+	<br>AWARDS
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img09_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img09.webp" alt="日本レコード大賞" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>第61回 輝く！日本レコード大賞
+	<br>新国立劇場
+	</h4>
+                    <ul>
+                      <li>1959年〜開催されている歴史ある音楽賞のイベント</li>
+                      <li>床用LEDビジョン・ウィンドウビジョン（シースルービジョン）・屋内用LEDビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider02-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>Demon
+	<br>slayer
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img01_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img01.webp" alt="『舞台「鬼滅の刃」其ノ肆 遊郭潜入』" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>『舞台「鬼滅の刃」其ノ肆 遊郭潜入』</h4>
+                    <ul>
+                      <li>2023年11月にメルパルクホール大阪と2023年12月にTOKYO DOME CITY HALLで行われた公演にLEDビジョンを設置しました。</li>
+                      <li>屋内LEDビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider03-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>NITORI</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img03_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img03.webp" alt="ニトリ" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>ニトリ</h4>
+                    <ul>
+                      <li>日中でも抜群の視認性を誇り、シーズナルな映像やフロアガイドなど多様なコンテンツを放映</li>
+                      <li>屋外用LEDビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider04-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>SSFF & ASIA
+	<br>2020
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img04_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img04.webp" alt="ショートショート フィルムフェスティバル & アジア" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>ショートショート
+	<br>フィルムフェスティバル & アジア
+	</h4>
+                    <ul>
+                      <li>米国アカデミー賞公認・アジア最大級・日本初の国際短編映画祭</li>
+                      <li>透過型LEDビジョン、AI検温モニタ『KAOIRO』</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider05-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>FLAGSHIP
+	<br>SHOP
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img05_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img05.webp" alt="MiMC Omotesando FLAGSHIP SHOP" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>MiMC Omotesando
+	<br>FLAGSHIP SHOP
+	</h4>
+                    <ul>
+                      <li>限られた空間で音や光などを使ってその場所に訪れる人へ、空間の印象を植え付けます。</li>
+                      <li>屋内用ビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider06-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>NAGOYA
+	<br>e-STADIUM
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img06_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img06.webp" alt="ナゴヤeスタジアム" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>ナゴヤeスタジアム</h4>
+                    <ul>
+                      <li>生徒や来場者を迎え入れるカウンターにLEDビジョンを設置</li>
+                      <li>屋内用LEDビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--slider07-->
+            <div class="splide__slide">
+              <div class="p-exam--box">
+                <div class="p-exam--hero u-eng">
+                  <p>FIAT
+	<br>PICNIC
+	</p>
+                </div>
+                <div class="p-exam--detail">
+                  <div class="p-exam--pic">
+                    <picture>
+                      <source srcset="images/exam-img08_sp.webp" media="(max-width: 767px)" />
+                      <img src="images/exam-img08.webp" alt="FIAT PICNIC" width="720" height="605" decoding="async" loading="lazy">
+                    </picture>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" name="circle">
+                      <circle cx="64" cy="64" r="58" />
+                    </svg>
+                  </div>
+                  <div class="p-exam--text">
+                    <h4>FIAT PICNIC 2022</h4>
+                    <ul>
+                      <li>イベントの大型モニターとしてLEDビジョンを導入</li>
+                      <li>屋外用LEDビジョン</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/section07-->
+
+  <!--section08-->
+  <section class="p-flow">
+    <div class="p-flow__inner">
+      <h3 class="c-title">導入までの流れ</h3>
+      <ul class="p-flow--list">
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>01</span>
+          <span class="-content">問い合わせ・要件ヒアリング</span>
+        </li>
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>02</span>
+          <span class="-content">製品のご提案・概算見積り算出</span>
+        </li>
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>03</span>
+          <span class="-content">現地調査・施工お打ち合わせ<br>コンテンツ制作のご相談</span>
+        </li>
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>04</span>
+          <span class="-content">見積もり算出<br>ご注文・在庫確保</span>
+        </li>
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>05</span>
+          <span class="-content">設置/設営</span>
+        </li>
+        <li class="p-flow--list__item">
+          <span class="-step"><small>STEP</small>06</span>
+          <span class="-content">販売：保守点検<br>レンタル：撤去</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <!--/section08-->
+
+  <!--CTA-->
+  <div class="c-cta">
+    <div class="c-cta--title">
+      <h3>お気軽にご質問・ご相談ください</h3>
+      <p>まだ詳細が決まっていなくても大丈夫です。導入相談も無料で承っております。<br>どんなイベントにでも最適なプランをご提案させていただきます。</p>
+    </div>
+    <div class="c-cta--btns">
+      <a href="https://led.led-tokyo.co.jp/catalogue/" target="_blank" class="c-btn c-btn--black c-icon--download">カタログダウンロード </a>
+      <a href="#conform" class="c-btn c-btn--white c-icon--mail">お問い合わせ </a>
+    </div>
+  </div>
+  <!--/CTA-->
+
+  <!--section08-->
+  <section class="p-showroom">
+    <div class="p-showroom__inner">
+      <h3 class="c-title">ショールーム・スタジオ</h3>
+      <p class="p-showroom--text">ライブコンサート、ミュージックビデオやCM撮影、展示会、セミナー、スポーツイベント様々な実績があります。<br>
+	規模の大小、または設置環境や用途問わず対応可能です。<br>
+	お気軽にご相談ください。</p>
+      <div class="p-showroom--list">
+        <div class="p-showroom--box">
+          <div class="p-showroom--pic">
+            <a href="https://my.matterport.com/show/?m=vyJ4wNsZ2Xr&amp;lang=jp&amp;help=2&amp;hr=1" target="_blank" rel="noopener noreferrer">
+              <picture>
+                <img src="images/showroom-img01.webp" data-src="images/showroom-img01.webp" alt="VR" width="auto" height="316" decoding="async" loading="lazy">
+              </picture>
+            </a>
+          </div>
+          <h4>LED TOKYOショールーム</h4>
+          <p>導入検討している製品実機を間近で体感できます。また展示会場やテレビ収録、ミュージックビデオの利用実績も多数ありスタジオとしてもご提供可能。</p>
+        </div>
+        <div class="p-showroom--box">
+          <div class="p-showroom--pic youtube">
+            <iframe width="100%" height="auto" src="https://www.youtube.com/embed/YvmoKqQpZgE?si=1VdZbaQAPc6ktvdH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h4>YOKOHAMA STUDIO</h4>
+          <p>横浜駅直通「アソビル ASOBUILD」に大型ビジョン常設の総合撮影スタジオが誕生。コの字の垂直LED3面＋床面LEDによる4面構成のLED空間を使用して圧倒的な空間演出ができます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/section08-->
+  <!--section09-->
+  <section class="p-faq">
+    <div class="p-faq__inner">
+      <h3 class="c-title">よくある質問</h3>
+      <div class="p-faq--list">
+        <dl>
+          <dt>費用はどれくらいですか？<span></span></dt>
+          <dd style="max-height: 0; padding-top: 0; padding-bottom: 0;">ピッチサイズ・画面サイズや契約形態(購入・レンタル)によって大幅に価格は変わってきます。ニーズに沿う製品や施工・映像ソース制作・メンテナンス等、当社でトータルサポートをさせていただきますので詳細を「お問い合わせ」からお聞かせください。</dd>
+        </dl>
+        <dl>
+          <dt>「ピッチサイズ」とは何ですか？<span></span></dt>
+          <dd style="max-height: 0; padding-top: 0; padding-bottom: 0;">「ピッチサイズ」とは、LEDモジュールのLED端子の”距離”を指します。LEDビジョンの場合、「視認させるターゲットとLEDモジュールとの距離」によってご提案させていただく製品が変わってきます。</dd>
+        </dl>
+        <dl>
+          <dt>画面サイズだけ伝えれば、ご提案いただけますか？<span></span></dt>
+          <dd style="max-height: 0; padding-top: 0; padding-bottom: 0;">はい、可能です。設置場所や視認させるターゲットをお伺いさせていただき、ご予算含めて最適のLEDビジョン・LCD(液晶ディスプレイ)をご提案させていただきます。</dd>
+        </dl>
+        <dl>
+          <dt>屋外で設置する場合、どんな場所でも可能ですか？<span></span></dt>
+          <dd style="max-height: 0; padding-top: 0; padding-bottom: 0;">希望する設置場所お伺いし、ご提案をさせていただきます。<br><span class="u-font--small">※稀に行政によって設置ができないケースもございますので、まずは「お問い合わせ」にて詳細をお聞かせください。当社で設置可能かお調べ致します。</span></dd>
+        </dl>
+        <dl>
+          <dt>映像ソースの出力はPCですか？<span></span></dt>
+          <dd style="max-height: 0; padding-top: 0; padding-bottom: 0;">PC・USBメモリー・SDカードから出力が可能です。<br>
+            映像ソースの出力方法を含めトータルサポートをさせていただきますのでご安心ください。<br>
+            また、映像ソースをご用意できない場合、弊社で制作もお承っております。お気軽にご要望をお申し付けください。
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <!--/section09-->
+  <!--form02-->
+  <section class="p-inquiry" id="conform">
+    <div class="p-inquiry__inner">
+      <h3 class="c-title">お問い合わせ</h3>
+      <div class="p-inquiry--form">
+        <form accept-charset="UTF-8" method="post" action="https://info.led-tokyo.co.jp/l/868321/2024-08-29/c1lhbh">
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">興味のある製品</div>
+            <div class="p-inquiry--form__body">
+              <span class="p-inquiry--form__checkboxs">
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="屋内用LEDビジョン" onchange="">
+                  <span class="-left">屋内用LEDビジョン</span>
+                </label>
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="屋外用LEDビジョン" onchange="">
+                  <span class="-left">屋外用LEDビジョン</span>
+                </label>
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="床用LEDビジョン" onchange="">
+                  <span class="-left">床用LEDビジョン</span>
+                </label>
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="ウインドウビジョン" onchange="">
+                  <span class="-left">ウインドウビジョン</span>
+                </label>
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="液晶ディスプレイ" onchange="">
+                  <span class="-left">液晶ディスプレイ</span>
+                </label>
+                <label class="inline">
+                  <input type="checkbox" name="InterestedProduct" v-model="ftInput.InterestedProduct" value="その他機材" onchange="">
+                  <span class="-left">その他機材</span>
+                </label>
+              </span>
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'InterestedProduct').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('InterestedProduct', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">会社名</div>
+            <div class="p-inquiry--form__body">
+              <input type="text" name="company_name" v-model="ftInput.company_name" id="company_name" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" placeholder="例）LED TOKYO 株式会社">
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'company_name').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('company_name', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">担当者名</div>
+            <div class="p-inquiry--form__body">
+              <div class="p-inquiry--form__name">
+                <input type="text" name="last_name" v-model="ftInput.last_name" id="last_name" value="" class="text" size="30" maxlength="80" onchange="" onfocus="" placeholder="例）山田">
+                <input type="text" name="first_name" v-model="ftInput.first_name" id="first_name" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" placeholder="例）太郎">
+              </div>
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'last_name').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('last_name', fterrors)">{{item.message}}</p>
+              </template>
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'first_name').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('first_name', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">電話番号</div>
+            <div class="p-inquiry--form__body">
+              <input type="text" name="tel" v-model="ftInput.tel" id="tel" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" placeholder="例）03-6804-5393">
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'tel').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('tel', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">メールアドレス</div>
+            <div class="p-inquiry--form__body">
+              <input type="text" name="email" v-model="ftInput.email" id="email" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" placeholder="例）led.tokyo@led-tokyo.co.jp">
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'email').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('email', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__row">
+            <div class="p-inquiry--form__label -required">問い合わせ</div>
+            <div class="p-inquiry--form__body">
+              <textarea name="message" v-model="ftInput.message" id="message" onchange="" cols="40" rows="4" class="standard"></textarea>
+              <template v-if="isFtValid && fterrors.filter(item => item.value == 'message').length > 0">
+                <p class="p-inquiry--form__error" v-for="item in errorFilter('message', fterrors)">{{item.message}}</p>
+              </template>
+            </div>
+          </div>
+          <div class="p-inquiry--form__privacy">
+            <label>
+              <input type="checkbox" name="PrivacyPolicy" v-model="ftInput.PrivacyPolicy" id="PrivacyPolicy" value="1" onchange="">
+              <span><a href="https://led.led-tokyo.co.jp/privacy-policy/" target="_blank" rel="nooperner">プライバシーポリシー</a>に同意する</span>
+            </label>
+          </div>
+          <template v-if="isFtValid && fterrors.filter(item => item.value == 'PrivacyPolicy').length > 0">
+            <p class="p-inquiry--form__error" v-for="item in errorFilter('PrivacyPolicy', fterrors)">{{item.message}}</p>
+          </template>
+          <button class="p-inquiry--form__submit c-btn c-btn--blue" @click="handleFtSubmit">上記内容で送信する</button>
+          <input type="hidden" id="yclid_field" name="yclid_field" value="">
+          <input type="hidden" id="msclid_field" name="msclid_field" value="">
+          <input type="hidden" id="gclid_field" name="gclid_field" value="">
+          <input type="hidden" id="fbclid_field" name="fbclid_field" value="">
+        </form>
+      </div>
+      <!-- <div class="p-inquiry--form">
+	<iframe src="https://info.led-tokyo.co.jp/l/868321/2023-06-26/brgm33" width="100%" height="1100" type="text/html" frameborder="0" allowTransparency="true" style="border: 0" title="ftform" id="form-feature"></iframe>
+	</div> -->
+    </div>
+  </section>
+  <section class="p-inquiry -tel">
+    <div class="p-inquiry--tel">
+      <p>お電話でもご相談が可能です</p>
+      <a href="tel:0120-387-048">
+        <p class="p-inquiry--telnum">0120-387-048</p>
+      </a>
+      <p class="p-inquiry--time">受付時間：平日10時～19時</p>
+    </div>
+  </section>
