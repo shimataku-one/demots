@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <title>FHtest</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="Script/main.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">
+        <h1>フォームハンドラ検証：SDO_utm検証</h1>
+        <p><a href="index.html">←戻る</a></p>
+      </div>
+    </header>
+  </div>
+
+  <hr />
+
+  <div class="container">
+    <form action="https://go.demo.pardot.com/l/793843/2025-01-29/3b5s5y?utm_source=shiro&utm_medium=display&utm_campaign=sample_promotion2020" method="post">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="form-group">
+
+          <label for="pardot_extra_field">Comments正</label>
+          <input type="text" id="pardot_extra_field" name="pardot_extra_field">
+
+          <label for="pi_extra_field">Comments</label>
+          <input type="text" name="pi_extra_field" id="pi_extra_field" class="form-control">
+        </div>
+        <div class="form-group utm_campaign">
+          <label for="utm_campaign">utm_campaign</label>
+          <input type="text" name="utm_campaign" id="utm_campaign" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="lastname"><span class="label label-danger">必須</span> lastname</label>
+          <input type="text" id="lastname" name="lastname" class="form-control" placeholder="例：シマタク" autofocus required />
+        </div>
+        <div class="form-group">
+          <label for="email"><span class="label label-danger">必須</span>
+            メールアドレス</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="例：heroku@salesforce.com" required />
+        </div>
+        <div class="form-group">
+          <label for="webiner">
+            <span class="label label-success">任意</span>ウェビナー/展示会登録状況</label>
+          <input type="webiner" id="webiner" name="webiner" class="form-control" />
+        </div>
+
+        <div class="form-group">
+          <label for="job"><span class="label label-success">任意</span> 職業</label>
+          <select id="job" name="job" class="form-control">
+            <option value="">選択してください</option>
+            <option value="Webデザイナー">Webデザイナー</option>
+            <option value="Webディレクター">Webディレクター</option>
+            <option value="フロントエンドエンジニア">
+              フロントエンドエンジニア
+            </option>
+            <option value="バックエンドエンジニア">
+              バックエンドエンジニア
+            </option>
+            <option value="ゴリラ">ゴリラ</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><span class="label label-success">任意</span>
+            学びたいこと（複数選択可）</label>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="q1_html" name="q1" value="デザイン" />デザインについて
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="q2_html" name="q1" value="プログラミング" />プログラミングについて
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="q2_html" name="q1" value="マーケティング" />マーケティングについて
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" id="q2_html" name="q1" value="バナナ" />バナナについて
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">送信する</button>
+      </div>
+    </form>
+  </div>
+  <!-- <iframe src="https://go.takushimada.work/l/960882/2022-06-06/2ddns" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe> -->
+  <hr />
+
+  <div class="container">
+    <footer>
+      <p>&copy; ShimaTaku.</p>
+    </footer>
+  </div>
+  <script type='text/javascript'>
+    piAId = '794843';
+    piCId = '';
+    piHostname = 'sdowww.takushimada.work';
+
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + piHostname + '/pd.js';
+        var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+      }
+      if (window.attachEvent) { window.attachEvent('onload', async_load); }
+      else { window.addEventListener('load', async_load, false); }
+    })();
+  </script>
+</body>
+</html>
