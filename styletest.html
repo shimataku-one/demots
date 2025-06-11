@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="http://go.pardot.com">
+  <meta charset="utf-8" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <style>
+    /* --------------------------------------------------------------
+            FORM STYLES
+        ----------------------------------------------------------------- */
+
+    /* Border-box box model FTW! */
+    #pardot-form,
+    #pardot-form *,
+    #pardot-form *:before,
+    #pardot-form *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    /* Override form margin and padding set in the default stylesheet. Inherit font and color from page. */
+    #pardot-form {
+      margin: 0;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+    }
+
+    /* Override form field wrapper margin and padding set in the default stylesheet. */
+    #pardot-form .form-field,
+    #pardot-form .submit {
+      margin: 15px 0 15px 0;
+      padding: 0;
+    }
+
+    /* Remove top margin from first from field wrapper. */
+    #pardot-form .form-field:first-child {
+      margin-top: 0;
+    }
+
+    /* Set default input style. */
+    #pardot-form input {
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+      color: #2c3e50;
+      font-size: 14px;
+      padding: 7px 15px;
+      width: 100%;
+    }
+
+    /* When labels are not floated left, set width on text inputs, textareas, and selects to 100%. */
+    #pardot-form input.text,
+    #pardot-form input.date,
+    #pardot-form textarea,
+    #pardot-form select {
+      text-align: left !important;
+      width: 100%;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* When labels are floated left, set width on field labels to a percentage of available width. In browsers that support calc(), use static label width instead and the form field will consume the remaining width. */
+    #pardot-form.label-left .field-label {
+      width: 35%;
+      width: calc(115px);
+      text-align: left;
+    }
+
+    /* When labels are floated left, set width on text inputs, textareas, and selects to a percentage. In supported browsers, set width to 100% minus the width of the label instead. */
+    #pardot-form.label-left input.text,
+    #pardot-form.label-left input.date,
+    #pardot-form.label-left textarea,
+    #pardot-form.label-left select {
+      width: 65%;
+      width: calc(100% - 115px);
+      text-align: left;
+    }
+
+    /* When labels are floated left, indent supporting form elements by the same amount as the field label. */
+    #pardot-form.label-left span.value,
+    #pardot-form.label-left .description,
+    #pardot-form.label-left .no-label &gt;
+
+    *,
+    #pardot-form.label-left .submit,
+    #pardot-form.label-left .error.no-label {
+      margin-left: 35%;
+      margin-left: calc(115px);
+    }
+
+    /* Remove unnecessary left padding on required radio/checkbox field labels when label alignment is set to above and the required symbol is set to default in form styling options. */
+    #pardot-form label.inline {
+      padding-left: 0;
+    }
+
+    /* Backup styles in case padding is added to text inputs. */
+    #pardot-form input.date {
+      padding-left: 0px;
+      background-position: left center;
+    }
+
+    #pardot-form .submit input {
+      background-color: #337ab7;
+      color: #fff;
+    }
+
+    /* --------------------------------------------------------------
+            BASE
+        ----------------------------------------------------------------- */
+
+    /* Set the base font */
+    body {
+      color: #444;
+      font-family: inherit;
+      line-height: 27px;
+      font-size: 15px;
+    }
+
+    /* Set heading fonts */
+    h1 {}
+
+    h2 {}
+
+    h3 {
+      font-size: 20px;
+    }
+
+    h4 {}
+
+    /* Set default background colour */
+    .bgcolour {
+      background-color: #eee;
+    }
+
+    /* Set custom background colours for specific blocks, also update font colours if dark BG  */
+    .header.bgcolour {
+      /* background-color: #eee; */
+    }
+
+    .footer.bgcolour {
+      /* background-color: #eee; */
+    }
+
+    .block-one.bgcolour {
+      background-color: #20232c;
+      color: #fff;
+    }
+
+    .block-two.bgcolour {
+      /* background-color: #eee; */
+    }
+
+
+
+    /* --------------------------------------------------------------
+            TEMPLATE DETAILS
+        ----------------------------------------------------------------- */
+
+    .logo {
+      text-align: left;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .logo,
+    .cta-container {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+    }
+
+    .cta p {
+      margin-bottom: 0;
+      font-size: 21px;
+      font-weight: 200;
+    }
+
+    .block-two .thumbnail img {
+      max-width: 100%;
+    }
+
+    footer &gt;
+
+    div {
+      text-align: right;
+    }
+
+    /* Grey BG */
+    .grey {
+      background-color: #eee;
+    }
+
+    /* --------------------------------------------------------------
+            SPACING
+        ----------------------------------------------------------------- */
+
+    /* make element edge to edge */
+    .flush {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    /* vertical padding */
+    .vpadding {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    /* top padding only */
+    .tpadding {
+      padding-top: 20px;
+      padding-bottom: 0px;
+    }
+
+    /* bottom padding only */
+    .bpadding {
+      padding-top: 0px;
+      padding-bottom: 20px;
+    }
+
+    /* large vertical padding */
+    .vpaddingLG {
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    /* spave below headings */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-bottom: 15px;
+    }
+
+    /* space below paragraph */
+    p {
+      margin-bottom: 20px;
+    }
+
+    /* --------------------------------------------------------------
+            SOCIAL
+        ----------------------------------------------------------------- */
+
+    /* Social container spacing */
+    .social {
+      padding-top: 15px;
+      line-height: 20px;
+      float: left;
+    }
+
+    /* Make everything within social display next to one another */
+    .social * {
+      display: inline;
+      line-height: 20px;
+    }
+
+    /* Social list spacing */
+    .social-list {
+      padding-left: 10px;
+      margin: 0px;
+    }
+
+    /* Social list display next to one another */
+    .social-list li {
+      display: inline;
+    }
+
+    /* Disable underlines on image link hover */
+    .social-list a:hover {
+      text-decoration: none;
+    }
+
+    /* Share button image specific style */
+    #share-buttons img {
+      width: 20px;
+      border: 0;
+      box-shadow: 0;
+      display: inline;
+    }
+
+    /* --------------------------------------------------------------
+            RESPONSIVE
+        ----------------------------------------------------------------- */
+    /* xs */
+    @media(max-width:767px) {
+      .pull-right {
+        float: none !important;
+        text-align: center;
+      }
+
+      .social {
+        text-align: center;
+        float: none;
+      }
+
+      .cta {
+        padding-top: 20px;
+        text-align: center;
+      }
+
+      .logo {
+        width: 100%;
+        text-align: center;
+      }
+
+      .cta-container {
+        width: 100%;
+
+      }
+
+      .cta p {
+        margin-bottom: 0;
+      }
+
+      .jumbotron {
+        margin-bottom: 0;
+      }
+    }
+
+    /* sm */
+    @media(max-width:768px) {
+      #pardot-form.label-left .field-label {
+        width: 100%;
+        text-align: left;
+      }
+
+      #pardot-form.label-left input.text,
+      #pardot-form.label-left input.date,
+      #pardot-form.label-left textarea,
+      #pardot-form.label-left select {
+        width: 100%;
+      }
+
+      #pardot-form.label-left span.value,
+      #pardot-form.label-left .description,
+      #pardot-form.label-left .no-label &gt;
+
+      *,
+      #pardot-form.label-left .submit,
+      #pardot-form.label-left .error.no-label {
+        width: 100%;
+      }
+
+      #pardot-form.label-left span.value,
+      #pardot-form.label-left .description,
+      #pardot-form.label-left .no-label &gt;
+
+      *,
+      #pardot-form.label-left .submit,
+      #pardot-form.label-left .error.no-label {
+        margin-left: 0;
+      }
+
+      form.form p {
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+      }
+    }
+
+    /* md */
+    @media(max-width:992px) {}
+
+    /* lg */
+    @media(min-width:1200px) {}
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="https://info.casio-human-sys.co.jp/css/form.css?ver=2021-09-20" />
+  <script type="text/javascript" src="https://info.casio-human-sys.co.jp/js/piUtils.js?ver=2021-09-20"></script>
+  <script type="text/javascript">
+    piAId = '280852';
+    piCId = '3835';
+    piHostname = 'pi.pardot.com';
+    if (!window['pi']) { window['pi'] = {}; } pi = window['pi']; if (!pi['tracker']) { pi['tracker'] = {}; } pi.tracker.pi_form = true;
+    (function () {
+      function async_load() {
+        var s = document.createElement('script'); s.type = 'text/javascript';
+        s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+        var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+      }
+      if (window.attachEvent) { window.attachEvent('onload', async_load); }
+      else { window.addEventListener('load', async_load, false); }
+    })();
+  </script>
+</head>
+<body><!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="header bgcolour vpadding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6 logo">
+
+          <div class="container">
+            <div class="row vpadding">
+              <div class="col-md-8">
+
+              </div><!-- div-md-8 -->
+              <div class="col-md-4">
+                <div class="editable">
+                  <form accept-charset="UTF-8" method="post" action="https://info.casio-human-sys.co.jp/l/279852/2025-04-23/2hc99x" class="form" id="pardot-form">
+
+                    <style type="text/css">
+                      form.form p label {
+                        font-size: 12pt;
+                        float: left;
+                        display: inline;
+                      }
+
+                      form.form .pd-checkbox:after {
+                        content: " ";
+                        display: table;
+                        clear: both;
+                      }
+
+                      form.form .pd-checkbox {
+                        *zoom: 1;
+                      }
+
+                      form.form .pd-checkbox .value span {
+                        float: left !important;
+                      }
+                    </style>
+
+                    <!-- 必須マーク -->
+                    <p style="margin-bottom: 10px;"><span style="color:#f1c40f;">※</span>は必須項目です。</p>
+
+                    <!-- 姓 -->
+                    <p class="form-field last_name pd-text required">
+                      <label class="field-label" for="279852_253458pi_279852_253458">姓<span style="color:#f1c40f;">※</span></label>
+                      <input type="text" name="279852_253458pi_279852_253458" id="279852_253458pi_279852_253458" class="text" maxlength="80" />
+                      <span class="description">例）樫尾</span>
+                    </p>
+                    <div id="error_for_279852_253458pi_279852_253458" style="display:none"></div>
+
+                    <!-- 名 -->
+                    <p class="form-field first_name pd-text required">
+                      <label class="field-label" for="279852_253461pi_279852_253461">名<span style="color:#f1c40f;">※</span></label>
+                      <input type="text" name="279852_253461pi_279852_253461" id="279852_253461pi_279852_253461" class="text" maxlength="40" />
+                    </p>
+                    <div id="error_for_279852_253461pi_279852_253461" style="display:none"></div>
+
+                    <!-- メール -->
+                    <p class="form-field email pd-text required">
+                      <label class="field-label" for="279852_253464pi_279852_253464">メール<span style="color:#f1c40f;">※</span></label>
+                      <input type="email" name="279852_253464pi_279852_253464" id="279852_253464pi_279852_253464" class="text" maxlength="255" />
+                    </p>
+                    <div id="error_for_279852_253464pi_279852_253464" style="display:none"></div>
+
+                    <!-- 会社 -->
+                    <p class="form-field company pd-text required">
+                      <label class="field-label" for="279852_253467pi_279852_253467">会社<span style="color:#f1c40f;">※</span></label>
+                      <input type="text" name="279852_253467pi_279852_253467" id="279852_253467pi_279852_253467" class="text" maxlength="255" />
+                    </p>
+                    <div id="error_for_279852_253467pi_279852_253467" style="display:none"></div>
+
+                    <!-- 部署名 -->
+                    <p class="form-field department pd-text required">
+                      <label class="field-label" for="279852_253470pi_279852_253470">部署名<span style="color:#f1c40f;">※</span></label>
+                      <input type="text" name="279852_253470pi_279852_253470" id="279852_253470pi_279852_253470" class="text" maxlength="100" />
+                    </p>
+                    <div id="error_for_279852_253470pi_279852_253470" style="display:none"></div>
+
+                    <!-- 役職 -->
+                    <p class="form-field job_title pd-select">
+                      <label class="field-label" for="279852_253473pi_279852_253473">役職</label>
+                      <select name="279852_253473pi_279852_253473" id="279852_253473pi_279852_253473" class="select">
+                        <option value="" selected="selected"></option>
+                        <option value="1881135">経営者・役員相当</option>
+                        <option value="1881138">部長相当</option>
+                        <option value="1881141">課長・マネージャー相当</option>
+                        <option value="1881144">係長・主任・リーダー相当</option>
+                        <option value="1881147">一般社員</option>
+                        <option value="1881150">その他</option>
+                      </select>
+                    </p>
+                    <div id="error_for_279852_253473pi_279852_253473" style="display:none"></div>
+
+                    <!-- 電話番号 -->
+                    <p class="form-field phone pd-text required">
+                      <label class="field-label" for="279852_253476pi_279852_253476">電話番号<span style="color:#f1c40f;">※</span></label>
+                      <input type="tel" name="279852_253476pi_279852_253476" id="279852_253476pi_279852_253476" class="text" maxlength="40" />
+                    </p>
+                    <div id="error_for_279852_253476pi_279852_253476" style="display:none"></div>
+
+                    <!-- お問い合わせ内容 -->
+                    <p class="form-field toiawase_naiyou pd-textarea required">
+                      <label class="field-label" for="279852_253479pi_279852_253479">お問い合わせ内容<span style="color:#f1c40f;">※</span></label>
+                      <textarea name="279852_253479pi_279852_253479" id="279852_253479pi_279852_253479" class="standard" cols="40" rows="10"></textarea>
+                    </p>
+                    <div id="error_for_279852_253479pi_279852_253479" style="display:none"></div>
+
+                    <!-- 個人情報同意 -->
+                    <p class="form-field CustomObject1747622308787 pd-checkbox required">
+                      <label class="field-label" for="279852_255408pi_279852_255408">個人情報の取扱いについて同意します<span style="color:#f1c40f;">※</span></label>
+                      <span class="value">
+                        <span>
+                          <input type="checkbox" name="279852_255408pi_279852_255408_1883321" id="279852_255408pi_279852_255408_1883321" value="1883321" />
+                          <label class="inline" for="279852_255408pi_279852_255408_1883321"></label>
+                        </span>
+                      </span>
+                    </p>
+                    <div id="error_for_279852_255408pi_279852_255408" style="display:none"></div>
+
+                    <!-- スパム防止用フィールド -->
+                    <p style="position:absolute; width:190px; left:-9999px; top:-9999px;visibility:hidden;">
+                      <label for="pi_extra_field">Comments</label>
+                      <input type="text" name="pi_extra_field" id="pi_extra_field"/>
+                    </p>
+
+                    <input name="_utf8" type="hidden" value="&#9731;" />
+
+                    <!-- 送信ボタン -->
+                    <p class="submit">
+                      <input type="submit" accesskey="s" value="送信" />
+                    </p>
+                    <p><a href="https://secure.casio.jp/chs/inquiry/privacy.html" target="_blank">個人情報の取扱いについて</a></p>
+
+
+
+                    <p><span style="color:#f1c40f;">※</span>は必須項目です。</p>
+
+
+
+
+                    <p class="form-field  last_name pd-text required    ">
+
+					<label class="field-label" for="279852_253458pi_279852_253458">姓</label>
+
+
+				<input type="text" name="279852_253458pi_279852_253458" id="279852_253458pi_279852_253458" value="" class="text" size="30" maxlength="80" onchange="" onfocus="" />
+
+					<span class="description">例）樫尾</span>
+
+			</p>
+                    <div id="error_for_279852_253458pi_279852_253458" style="display:none"></div>
+
+
+                    <p class="form-field  first_name pd-text required    ">
+
+					<label class="field-label" for="279852_253461pi_279852_253461">名</label>
+
+
+				<input type="text" name="279852_253461pi_279852_253461" id="279852_253461pi_279852_253461" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" />
+
+			</p>
+                    <div id="error_for_279852_253461pi_279852_253461" style="display:none"></div>
+
+
+                    <p class="form-field  email pd-text required    ">
+
+					<label class="field-label" for="279852_253464pi_279852_253464">メール</label>
+
+
+				<input type="text" name="279852_253464pi_279852_253464" id="279852_253464pi_279852_253464" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" />
+
+			</p>
+                    <div id="error_for_279852_253464pi_279852_253464" style="display:none"></div>
+
+
+                    <p class="form-field  company pd-text required    ">
+
+					<label class="field-label" for="279852_253467pi_279852_253467">会社</label>
+
+
+				<input type="text" name="279852_253467pi_279852_253467" id="279852_253467pi_279852_253467" value="" class="text" size="30" maxlength="255" onchange="" onfocus="" />
+
+			</p>
+                    <div id="error_for_279852_253467pi_279852_253467" style="display:none"></div>
+
+
+                    <p class="form-field  department pd-text required    ">
+
+					<label class="field-label" for="279852_253470pi_279852_253470">部署名</label>
+
+
+				<input type="text" name="279852_253470pi_279852_253470" id="279852_253470pi_279852_253470" value="" class="text" size="30" maxlength="100" onchange="" onfocus="" />
+
+			</p>
+                    <div id="error_for_279852_253470pi_279852_253470" style="display:none"></div>
+
+
+                    <p class="form-field  job_title pd-select     ">
+
+					<label class="field-label" for="279852_253473pi_279852_253473">役職</label>
+
+
+				<select name="279852_253473pi_279852_253473" id="279852_253473pi_279852_253473" class="select" onchange=""><option value="" selected="selected"></option>
+<option value="1881135">経営者・役員相当</option>
+<option value="1881138">部長相当</option>
+<option value="1881141">課長・マネージャー相当</option>
+<option value="1881144">係長・主任・リーダー相当</option>
+<option value="1881147">一般社員</option>
+<option value="1881150">その他</option>
+</select>
+
+			</p>
+                    <div id="error_for_279852_253473pi_279852_253473" style="display:none"></div>
+
+
+                    <p class="form-field  phone pd-text required    ">
+
+					<label class="field-label" for="279852_253476pi_279852_253476">電話番号</label>
+
+
+				<input type="text" name="279852_253476pi_279852_253476" id="279852_253476pi_279852_253476" value="" class="text" size="30" maxlength="40" onchange="" onfocus="" />
+
+			</p>
+                    <div id="error_for_279852_253476pi_279852_253476" style="display:none"></div>
+
+
+                    <p class="form-field  toiawase_naiyou pd-textarea required    ">
+
+					<label class="field-label" for="279852_253479pi_279852_253479">お問い合わせ内容</label>
+
+
+				<textarea name="279852_253479pi_279852_253479" id="279852_253479pi_279852_253479" onchange="" cols="40" rows="10" class="standard"></textarea>
+
+			</p>
+                    <div id="error_for_279852_253479pi_279852_253479" style="display:none"></div>
+
+
+                    <p class="form-field  CustomObject1747622308787 pd-checkbox required    ">
+
+					<label class="field-label" for="279852_255408pi_279852_255408">個人情報の取扱いについて同意します</label>
+
+
+				<span class="value"><span><input type="checkbox" name="279852_255408pi_279852_255408_1883321" id="279852_255408pi_279852_255408_1883321" value="1883321" onchange="" /><label class="inline" for="279852_255408pi_279852_255408_1883321">　</label></span></span>
+
+			</p>
+                    <div id="error_for_279852_255408pi_279852_255408" style="display:none"></div>
+
+
+
+
+                    <p style="position:absolute; width:190px; left:-9999px; top: -9999px;visibility:hidden;">
+		<label for="pi_extra_field">Comments</label>
+		<input type="text" name="pi_extra_field" id="pi_extra_field"/>
+	</p>
+
+
+                    <!-- forces IE5-8 to correctly submit UTF8 content  -->
+                    <input name="_utf8" type="hidden" value="&#9731;" />
+
+                    <p class="submit">
+			<input type="submit" accesskey="s" value="送信" />
+		</p>
+                    <p><a href="https://secure.casio.jp/chs/inquiry/privacy.html" target="_blank">個人情報の取扱いについて</a></p>
+
+                    <p>&nbsp;</p>
+
+
+
+
+                    <script type="text/javascript">
+                      //<![CDATA[
+
+                      var anchors = document.getElementsByTagName("a");
+                      for (var i = 0; i < anchors.length; i++) {
+                        var anchor = anchors[i];
+                        if (anchor.getAttribute("href") && !anchor.getAttribute("target")) {
+                          anchor.target = "_top";
+                        }
+                      }
+
+                      //]]>
+                    </script>
+                    <input type="hidden" name="hiddenDependentFields" id="hiddenDependentFields" value="" />
+                  </form>
+                  <script type="text/javascript">(function () {
+                      pardot.$(document).ready(function () {
+                        (function () {
+                          var $ = window.pardot.$;
+                          window.pardot.FormDependencyMap = [];
+
+                          $('.form-field-primary input, .form-field-primary select').each(function (index, input) {
+                            $(input).on('change', window.piAjax.checkForDependentField);
+                            window.piAjax.checkForDependentField.call(input);
+                          });
+                        })();
+                      });
+                    })();</script>
+                </div>
+              </div>
+            </div><!-- row vpadding -->
+          </div><!--/.container-->
+          <div class="grey clearfix">
+            <div class="container vpadding">
+              <div class="row">
+                <footer>
+                  <div class="col-sm-6 clearfix">
+
+                    </ul>
+                  </div><!-- social -->
+              </div><!-- col-md-9 -->
+              <div class="col-sm-6 clearfix">
+                <div class="editable pull-right" pardot-region="footer_text">
+                </div>
+              </div>
+              </footer>
+            </div>
+          </div>
+
+        </div><!-- grey -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        <script>
+
+          /* --------------------------------------------------------------
+              FUNCTIONS
+          ----------------------------------------------------------------- */
+          /**
+           * Replace all occurences of https://simplesharebuttons.com in the
+           * social sharing list with the url of this page, and all occurrence
+           * of "Check this out" with the page title
+           */
+          $(".social-list a").each(function () {
+            // get values
+            var thisPage = window.location.href;
+            var url = $(this).attr('href');
+
+            // get title of this page
+            var title = $(document).find("title").text();
+
+            // replace values
+            url = url.replace("http://www.pardot.com", thisPage);
+            url = url.replace("template-title", title);
+
+            //update value of the link anchor
+            $(this).attr('href', url);
+          });
+
+          /**
+           * Pardot label alignment fix
+           */
+          pardot.$(function () {
+            var $ = window.pardot.$;
+            // Add label-left class to the <form> if label alignment is set to Default or Left in form styling
+            var $labelAlignment = $('#pardot-form .field-label').css('float');
+            if ($labelAlignment == 'left') { $('#pardot-form').addClass('label-left'); }
+          });
+
+        </script>
+        <script>
+          window.addEventListener('load', postSize, false);
+          window.addEventListener('resize', postSize, false);
+          function postSize(e) {
+            setTimeout(function () {
+              var target = parent.postMessage ? parent : (parent.document.postMessage ? parent.document : undefined);
+              if (typeof target != 'undefined' && document.documentElement.offsetHeight)
+                var j = { 'execFlg': 'autoHeight', 'height': document.documentElement.offsetHeight };
+              target.postMessage(j, '*');
+            }, 0);
+          }
+        </script>
+</body>
+</html>

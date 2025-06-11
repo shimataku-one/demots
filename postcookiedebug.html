@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>インタラクティブCookieデバッグアシスタント</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Chosen Palette: Cool Slate -->
+  <!-- Application Structure Plan: The SPA is designed as a problem-oriented interactive diagnostic tool, not a linear text document. Its core is a visual overview chart and a series of "Problem Cards" for each major cause (Server-side, SameSite, CORS, etc.). This thematic structure helps users quickly navigate to relevant information. An interactive checklist transforms the report's static troubleshooting guide into a practical, usable tool. This architecture promotes active exploration and problem-solving, which is more effective for a developer debugging an issue than passive reading. -->
+  <!-- Visualization & Content Choices:
+        - Overview Donut Chart (Chart.js): Goal is to inform and organize. It provides a high-level summary of the problem categories. Clicking a slice navigates the user to the corresponding detailed section, acting as a visual navigation hub.
+        - Thematic Problem Cards (HTML/Tailwind): Goal is to inform and compare. Each card addresses a specific cause, presenting complex information from the report in a digestible, structured format using lists, code blocks, and highlighted text.
+        - Interactive Troubleshooting Checklist (HTML/JS): Goal is to organize and provide a practical tool. It turns the report's static list into a functional checklist, enhancing user engagement and utility.
+        - All content is carefully extracted and summarized from the source report to fit this interactive structure.
+    -->
+  <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: #f8fafc;
+      /* slate-50 */
+      color: #1e293b;
+      /* slate-800 */
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      height: auto;
+      max-height: 400px;
+    }
+
+    .nav-button {
+      transition: all 0.2s ease-in-out;
+      border-bottom: 4px solid transparent;
+    }
+
+    .nav-button.active {
+      border-bottom-color: #3b82f6;
+      /* blue-500 */
+      color: #1e293b;
+      /* slate-800 */
+    }
+
+    .content-card {
+      scroll-margin-top: 8rem;
+      /* Offset for sticky header */
+    }
+
+    code {
+      background-color: #e2e8f0;
+      /* slate-200 */
+      color: #1e293b;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    pre code {
+      display: block;
+      padding: 1rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+
+  <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+    <header class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2">インタラクティブCookieデバッグアシスタント</h1>
+      <p class="text-lg text-slate-600">POSTリクエスト後にCookieがセットされない原因を特定するためのガイド</p>
+    </header>
+
+    <section id="dashboard" class="mb-16 p-6 bg-white rounded-xl shadow-lg">
+      <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">問題の切り分け</h2>
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-slate-700">
+          <p class="mb-4">
+                        Cookieがセットされない問題は、複数の要因が絡み合っていることがよくあります。左のグラフは、主な原因のカテゴリを示しています。グラフの各セクションをクリックすると、関連する詳細な解説にジャンプします。
+                    </p>
+          <p>
+                        まず、最も可能性の高い原因から調査を開始しましょう。右側のデバッグチェックリストを使用して、体系的に問題を確認していくことをお勧めします。
+                    </p>
+        </div>
+        <div class="chart-container">
+          <canvas id="problemChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <div class="sticky top-0 bg-slate-50/80 backdrop-blur-lg z-10 py-4 mb-8 border-b">
+      <nav id="mainNav" class="flex flex-wrap justify-center gap-4 md:gap-8">
+        <!-- Nav buttons will be injected here by JS -->
+      </nav>
+    </div>
+
+    <main id="main-content" class="space-y-12">
+      <section id="checklist" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="text-blue-500">📋</span>
+                        体系的デバッグチェックリスト
+                    </h2>
+          <ul id="debug-checklist" class="space-y-3 text-slate-700">
+            <!-- Checklist items will be injected here by JS -->
+          </ul>
+        </div>
+      </section>
+
+      <section id="server" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="text-blue-500">⚙️</span>
+                        サーバーサイドの `Set-Cookie` ヘッダー設定ミス
+                    </h2>
+          <p class="mb-4">最も基本的な原因は、サーバーが送信する`Set-Cookie`ヘッダー自体の記述ミスや属性の不備です。ブラウザ開発者ツールの「Network」タブで、POSTリクエストのレスポンスヘッダーを必ず確認してください。</p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">`Secure` 属性</h3>
+              <p>HTTPS接続でのみ送信されるべきCookieに付与します。HTTPサイトで`Secure`付きCookieをセットしようとすると、ブラウザはそれを拒否します (<code>localhost</code>は例外)。<code>SameSite=None</code> を使用する場合、この属性は必須です。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">`HttpOnly` 属性</h3>
+              <p>JavaScriptからのアクセスを禁止し、XSS攻撃のリスクを軽減します。これが原因で`document.cookie`で確認できず、「セットされていない」と誤解することがあります。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">`Domain` と `Path` 属性</h3>
+              <p>Cookieが有効なドメインとパスを制限します。スコープが不適切だと、後続のリクエストでCookieが送信されません。例えば、<code>Path=/api</code>でセットされたCookieは<code>/dashboard</code>へのリクエストには含まれません。最も安全なのは<code>Path=/</code>です。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">`Expires` と `Max-Age` 属性</h3>
+              <p>Cookieの有効期限を指定します。過去の日付や0以下の`Max-Age`を指定すると、Cookieは即座に削除されるかセットされません。指定しない場合はセッションCookieとなり、ブラウザを閉じると消えます。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="samesite" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <span class="text-blue-500">🌐</span>
+                        `SameSite` 属性の動作と影響
+                    </h2>
+          <p class="mb-6">近年のブラウザでは`SameSite`属性がCookie挙動の鍵を握ります。特にクロスサイト（異なるドメイン間）でのPOSTリクエストでは、この属性の理解が不可欠です。</p>
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-semibold text-lg p-3 bg-red-100 text-red-800 rounded-md">`SameSite=Lax` (多くのブラウザのデフォルト)</h3>
+              <p class="mt-2 p-3 bg-red-50 rounded-md">クロスサイトのPOSTリクエストでは、原則としてCookieを送信しません。これがクロスサイト認証などでCookieがセットされない最も一般的な原因の一つです。同一サイト内でのPOSTでは問題なく機能します。</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg p-3 bg-amber-100 text-amber-800 rounded-md">`SameSite=Strict`</h3>
+              <p class="mt-2 p-3 bg-amber-50 rounded-md">最も厳格な設定で、いかなるクロスサイトリクエストでもCookieを送信しません。リンクを辿って別サイトから遷移してきた場合でも送信されません。</p>
+            </div>
+            <div>
+              <h3 class="font-semibold text-lg p-3 bg-green-100 text-green-800 rounded-md">`SameSite=None`</h3>
+              <p class="mt-2 p-3 bg-green-50 rounded-md">クロスサイトリクエストでCookieを送信することを許可します。ただし、セキュリティ上の理由から、必ず `Secure` 属性とセットで指定する必要があります。つまり、<code>Set-Cookie: ...; SameSite=None; Secure</code> のように記述し、サイトはHTTPSである必要があります。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cors" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                         <span class="text-blue-500">↔️</span>
+                        クロスオリジンリクエスト (CORS) と認証情報
+                    </h2>
+          <p class="mb-4">JavaScript (Fetch API, XHR) を使って異なるオリジンにPOSTリクエストを送る場合、CORSポリシーがCookieの送受信を制御します。</p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">クライアントサイドの要件</h3>
+              <p>リクエストにCookieを含めることを明示的に指定する必要があります。</p>
+              <pre><code>// Fetch API
+fetch(url, {
+  method: 'POST',
+  credentials: 'include'
+});
+
+// XMLHttpRequest
+const xhr = new XMLHttpRequest();
+xhr.withCredentials = true;</code></pre>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">サーバーサイドの要件</h3>
+              <p>レスポンスヘッダーで、認証情報付きのリクエストを許可する必要があります。</p>
+              <pre><code>Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: https://client.example.com</code></pre>
+              <p class="mt-2 text-sm text-red-600">注意: <code>Access-Control-Allow-Origin</code> にワイルドカード <code>*</code> を使用することはできません。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="browser" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                         <span class="text-blue-500">🛡️</span>
+                        ブラウザのプライバシー設定と拡張機能
+                    </h2>
+          <p class="mb-4">サーバーの設定が完璧でも、ユーザーのブラウザ環境がCookieの保存を妨げることがあります。</p>
+          <ul class="list-disc list-inside space-y-2 text-slate-700">
+            <li><strong>Cookieブロック設定:</strong> ユーザーが「すべてのCookieをブロック」や「サードパーティCookieをブロック」に設定している。</li>
+            <li><strong>プライベート/シークレットモード:</strong> 通常モードより厳しいプライバシー設定が適用され、特にサードパーティCookieがブロックされやすい。セッション終了時にCookieは破棄されます。</li>
+            <li><strong>トラッキング防止機能:</strong> SafariのITPやFirefoxのETPは、トラッカーと見なされたCookieの保存を妨げたり、有効期限を短縮したりします。</li>
+            <li><strong>ブラウザ拡張機能:</strong> 広告ブロッカーやプライバシー保護ツールが`Set-Cookie`ヘッダーを除去したり、Cookieの保存をブロックしたりすることがあります。</li>
+            <li><strong>ChromeのサードパーティCookie廃止:</strong> テストグループに参加しているユーザーは、サードパーティCookieが機能しません。</li>
+          </ul>
+          <p class="mt-4 bg-blue-100 text-blue-800 p-3 rounded-lg"><strong>切り分けのヒント:</strong> シークレットモードで、かつ全ての拡張機能を無効にしてテストすることで、これらの要因が原因かどうかを特定できます。</p>
+        </div>
+      </section>
+
+      <section id="network" class="content-card">
+        <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                         <span class="text-blue-500">📡</span>
+                        ネットワーク・環境・リクエストフロー
+                    </h2>
+          <p class="mb-4">リクエストの経路や開発環境特有の問題も原因となり得ます。</p>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">HTTP vs HTTPS</h3>
+              <p>開発環境(HTTP)と本番環境(HTTPS)の違いは、`Secure`属性の挙動に影響します。本番環境で「動かない」場合、これが原因の可能性があります。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">リダイレクト (302)</h3>
+              <p>POST後にリダイレクトする場合、`Set-Cookie`ヘッダーはリダイレクトレスポンスに含まれます。リダイレクト先のページでCookieが必要な場合、`Domain`や`Path`がリダイレクト先と適合している必要があります。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">プロキシ / CDN</h3>
+              <p>稀ですが、経路上にあるプロキシ、ファイアウォール、CDNが`Set-Cookie`ヘッダーを意図せず除去してしまう設定になっていることがあります。</p>
+            </div>
+            <div class="bg-slate-100 p-4 rounded-lg">
+              <h3 class="font-bold mb-2">ローカル開発環境</h3>
+              <p><code>localhost</code>は特別扱いされることが多いですが、<code>127.0.0.1</code>では挙動が異なる場合があります。サブドメインのテストには<code>lvh.me</code>のようなサービスが便利です。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = [
+        { id: 'checklist', name: 'デバッグチェックリスト', icon: '📋' },
+        { id: 'server', name: 'サーバー設定', icon: '⚙️' },
+        { id: 'samesite', name: 'SameSite属性', icon: '🌐' },
+        { id: 'cors', name: 'CORS', icon: '↔️' },
+        { id: 'browser', name: 'ブラウザ設定', icon: '🛡️' },
+        { id: 'network', name: 'ネットワーク/環境', icon: '📡' },
+      ];
+
+      const chartData = {
+        labels: ['サーバー設定', 'SameSite属性', 'CORS', 'ブラウザ設定', 'ネットワーク/環境'],
+        datasets: [{
+          label: '主な原因カテゴリ',
+          data: [30, 25, 15, 20, 10],
+          backgroundColor: [
+            '#60a5fa', // blue-400
+            '#facc15', // yellow-400
+            '#fb923c', // orange-400
+            '#4ade80', // green-400
+            '#a78bfa', // violet-400
+          ],
+          hoverOffset: 4,
+          borderColor: '#f8fafc',
+          borderWidth: 2,
+        }]
+      };
+
+      const checklistItems = [
+        "開発者ツールのNetworkタブで、POSTレスポンスに`Set-Cookie`ヘッダーが存在するか確認したか？",
+        "レスポンスの`Set-Cookie`ヘッダーの構文（属性、値）は正しいか？",
+        "開発者ツールのApplication/Storageタブで、Cookieがブラウザに保存されているか確認したか？",
+        "保存されたCookieの`Domain`, `Path`, `SameSite`等の属性は意図通りか？",
+        "`Secure`属性付きCookieをHTTPS経由でセットしているか？ (localhostを除く)",
+        "`SameSite=None`の場合、`Secure`属性も付与し、HTTPSで通信しているか？",
+        "`SameSite=Lax` (デフォルト) でクロスサイトPOSTを行っていないか？",
+        "クロスオリジンのFetch/XHRの場合、クライアントで`credentials: 'include'`を指定したか？",
+        "クロスオリジンの場合、サーバーは`Access-Control-Allow-Credentials: true`と、特定のオリジンを指定した`Access-Control-Allow-Origin`を返しているか？",
+        "シークレットモードや、拡張機能を無効にした状態でテストしたか？",
+        "POST後にリダイレクトがある場合、Cookieの`Path`や`Domain`はリダイレクト先と互換性があるか？",
+        "サーバーサイドのログで、Cookieを設定するコードが実行されていることを確認したか？"
+      ];
+
+      const mainNav = document.getElementById('mainNav');
+      const checklistContainer = document.getElementById('debug-checklist');
+
+      // Populate nav
+      sections.forEach(section => {
+        const button = document.createElement('button');
+        button.className = 'nav-button px-3 py-2 font-semibold text-slate-500 hover:text-slate-900';
+        button.textContent = `${section.icon} ${section.name}`;
+        button.dataset.target = section.id;
+        button.addEventListener('click', () => {
+          document.getElementById(section.id).scrollIntoView({ behavior: 'smooth' });
+        });
+        mainNav.appendChild(button);
+      });
+
+      // Populate checklist
+      checklistItems.forEach(itemText => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start';
+        const label = document.createElement('label');
+        label.className = 'flex items-center gap-3 cursor-pointer transition-colors duration-200 hover:text-slate-900';
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'form-checkbox h-5 w-5 rounded text-blue-500 focus:ring-blue-400 border-slate-300';
+        const span = document.createElement('span');
+        span.textContent = itemText;
+
+        label.appendChild(checkbox);
+        label.appendChild(span);
+        li.appendChild(label);
+
+        checkbox.addEventListener('change', (e) => {
+          if (e.target.checked) {
+            label.classList.add('line-through', 'text-slate-400');
+          } else {
+            label.classList.remove('line-through', 'text-slate-400');
+          }
+        });
+
+        checklistContainer.appendChild(li);
+      });
+
+
+      // Init Chart
+      const ctx = document.getElementById('problemChart').getContext('2d');
+      const problemChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: chartData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                padding: 20
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  let label = context.label || '';
+                  if (label) {
+                    label += ': ';
+                  }
+                  if (context.parsed !== null) {
+                    label += context.parsed + '%';
+                  }
+                  return label;
+                }
+              }
+            }
+          },
+          onClick: (event, elements) => {
+            if (elements.length > 0) {
+              const chartElement = elements[0];
+              const index = chartElement.index;
+              const sectionIdMap = ['server', 'samesite', 'cors', 'browser', 'network'];
+              const targetId = sectionIdMap[index];
+              if (targetId) {
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }
+        }
+      });
+
+      // Nav active state observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const navButton = document.querySelector(`.nav-button[data-target='${id}']`);
+          if (navButton) {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+              navButton.classList.add('active');
+            }
+          }
+        });
+      }, { rootMargin: '-40% 0px -60% 0px' });
+
+      document.querySelectorAll('.content-card').forEach(section => {
+        observer.observe(section);
+      });
+
+    });
+  </script>
+
+</body>
+</html>
