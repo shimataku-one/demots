@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国と州の選択</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    label,
+    select {
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>国と州の選択</h1>
+
+  <label for="country">国:</label>
+  <select id="country">
+    <option value="">国を選択してください</option>
+    <option value="USA">アメリカ</option>
+    <option value="Canada">カナダ</option>
+    <option value="Japan">日本</option>
+  </select>
+
+  <label for="state">州 / 都道府県:</label>
+  <select id="state">
+    <option value="">まず国を選択してください</option>
+  </select>
+
+  <script>
+    // 国と州のデータ
+    const data = {
+      USA: ["アラスカ", "カリフォルニア", "テキサス", "ニューヨーク"],
+      Canada: ["オンタリオ", "ケベック", "ブリティッシュコロンビア"],
+      Japan: ["北海道", "東京都", "大阪府", "福岡県"]
+    };
+
+    const countrySelect = document.getElementById('country');
+    const stateSelect = document.getElementById('state');
+
+    countrySelect.addEventListener('change', function () {
+      const selectedCountry = this.value; // 選択された国の値を取得
+      stateSelect.innerHTML = ''; // 州のドロップダウンをクリア
+
+      if (selectedCountry === "") {
+        const defaultOption = document.createElement('option');
+        defaultOption.value = "";
+        defaultOption.textContent = "まず国を選択してください";
+        stateSelect.appendChild(defaultOption);
+        return;
+      }
+
+      // 選択された国に対応する州のリストを取得
+      const states = data[selectedCountry];
+
+      // 州のドロップダウンにオプションを追加
+      if (states) {
+        states.forEach(state => {
+          const option = document.createElement('option');
+          option.value = state;
+          option.textContent = state;
+          stateSelect.appendChild(option);
+        });
+      } else {
+        // 選択された国に州のデータがない場合
+        const noDataOption = document.createElement('option');
+        noDataOption.value = "";
+        noDataOption.textContent = "対応する州/都道府県がありません";
+        stateSelect.appendChild(noDataOption);
+      }
+    });
+
+    // ページロード時に一度「州」のドロップダウンを初期化
+    // 国が選択されていない状態では「まず国を選択してください」と表示
+    const initialDefaultOption = document.createElement('option');
+    initialDefaultOption.value = "";
+    initialDefaultOption.textContent = "まず国を選択してください";
+    stateSelect.appendChild(initialDefaultOption);
+
+  </script>
+</body>
+</html>
