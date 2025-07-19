@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <title>MCG外部サイトフォーム埋め込み</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">
+        <h1>MCG外部サイトフォーム埋め込み</h1>
+        <p><a href="index.html">←戻る</a></p>
+      </div>
+    </header>
+  </div>
+
+  <hr />
+
+  <div class="container">
+    <h2>フォームハンドラiframe検証</h2>
+  </div>
+  <hr />
+<!-- これらのコードスニペットを下記の順で外部サイトページに挿入してください。 -->
+<!-- これらの <script> タグは組み込まれたフォームのすぐ上に挿入してください。 -->
+<script async="async" src="https://storm-80f8fc1932306f.my.site.com/lp/assets/scripts/external-forms-host.min.js"></script>
+<script async="async" src="https://storm-80f8fc1932306f.my.site.com/lp/assets/lightning_out_embed/prod/en-US/MCBOCLSYB46NBLRA22KF5ZEARVFQ.js" onload="window.sfdc_forms?sfdc_forms.init():window.sfdc_forms={loReady:!0}"></script>
+<!-- このタグにはフォームが含まれています。フォームを配置するページに追加してください。 -->
+<fragment-z4ve4srnq4mmrnk3va1ha8ds7xcnar5ar9kcy4pxis1 title="Marketing Form" id="container" data-external-form="true" data-web-tracking="true" data-recaptcha-site-key=""></fragment-z4ve4srnq4mmrnk3va1ha8ds7xcnar5ar9kcy4pxis1>
+
+  <div class="container">
+    <footer>
+      <p>&copy; ShimaTaku.</p>
+    </footer>
+  </div>
+</body>
+</html>
