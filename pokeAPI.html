@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポケモン図鑑 (JP)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #eff3f6;
+            --card-bg: #fff;
+            --text-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+        }
+
+        h1 {
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+        }
+
+        /* フィルターボタンのエリア */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        .filter-btn {
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, opacity 0.2s;
+            opacity: 0.7; /* デフォルトは少し薄く */
+        }
+
+        .filter-btn:hover {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 2px solid #333; /* 選択中を強調 */
+        }
+
+        .poke-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        .pokemon {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            margin: 15px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pokemon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pokemon img {
+            width: 100%;
+            max-width: 100px;
+            margin-top: 10px;
+        }
+
+        .info {
+            margin-top: 20px;
+        }
+
+        .number {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .name {
+            margin: 10px 0 5px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+
+        .type {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ポケモン図鑑</h1>
+    
+    <div class="search-container">
+        <input type="text" id="search" class="search-input" placeholder="名前 または No. で検索...">
+    </div>
+
+    <div id="filter-container" class="filter-container"></div>
+
+    <div id="poke-container" class="poke-container"></div>
+
+    <script>
+        const pokeContainer = document.getElementById('poke-container');
+        const searchInput = document.getElementById('search');
+        const filterContainer = document.getElementById('filter-container');
+        const pokemon_count = 151;
+        
+        const colors = {
+            fire: '#FDDFDF',
+            grass: '#DEFDE0',
+            electric: '#FCF7DE',
+            water: '#DEF3FD',
+            ground: '#f4e7da',
+            rock: '#d5d5d4',
+            fairy: '#fceaff',
+            poison: '#98d7a5',
+            bug: '#f8d5a3',
+            dragon: '#97b3e6',
+            psychic: '#eaeda1',
+            flying: '#F5F5F5',
+            fighting: '#E6E0D4',
+            normal: '#F5F5F5'
+        };
+
+        const main_types = Object.keys(colors);
+
+        const typeTranslations = {
+            fire: 'ほのお',
+            grass: 'くさ',
+            electric: 'でんき',
+            water: 'みず',
+            ground: 'じめん',
+            rock: 'いわ',
+            fairy: 'フェアリー',
+            poison: 'どく',
+            bug: 'むし',
+            dragon: 'ドラゴン',
+            psychic: 'エスパー',
+            flying: 'ひこう',
+            fighting: 'かくとう',
+            normal: 'ノーマル'
+        };
+
+        // フィルターボタンを生成する関数
+        const createFilterButtons = () => {
+            // 「全て」ボタン
+            const allBtn = document.createElement('button');
+            allBtn.classList.add('filter-btn', 'active'); // 最初はactive
+            allBtn.innerText = '全て';
+            allBtn.addEventListener('click', () => filterPokemon('all', allBtn));
+            filterContainer.appendChild(allBtn);
+
+            // 各タイプのボタン
+            main_types.forEach(type => {
+                const btn = document.createElement('button');
+                btn.classList.add('filter-btn');
+                btn.style.backgroundColor = colors[type]; // ボタンの色をタイプ色に
+                btn.innerText = typeTranslations[type];
+                btn.addEventListener('click', () => filterPokemon(type, btn));
+                filterContainer.appendChild(btn);
+            });
+        };
+
+        // フィルタリング処理
+        const filterPokemon = (type, btnElement) => {
+            // ボタンの見た目更新
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // 検索バーをリセット
+            searchInput.value = '';
+
+            const allCards = document.querySelectorAll('.pokemon');
+            allCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                
+                if (type === 'all' || cardType === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        };
+
+        const fetchPokemons = async () => {
+            // ボタン生成
+            createFilterButtons();
+
+            for (let i = 1; i <= pokemon_count; i++) {
+                await getPokemon(i);
+            }
+        };
+
+        const getPokemon = async (id) => {
+            const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+
+            const [pokemonRes, speciesRes] = await Promise.all([
+                fetch(url),
+                fetch(speciesUrl)
+            ]);
+
+            const pokemonData = await pokemonRes.json();
+            const speciesData = await speciesRes.json();
+
+            const jaName = speciesData.names.find(name => name.language.name === 'ja').name;
+            createPokemonCard(pokemonData, jaName);
+        };
+
+        const createPokemonCard = (pokemon, jaName) => {
+            const pokemonEl = document.createElement('div');
+            pokemonEl.classList.add('pokemon');
+
+            const id = pokemon.id.toString().padStart(3, '0');
+
+            const poke_types = pokemon.types.map(type => type.type.name);
+            const type = main_types.find(type => poke_types.indexOf(type) > -1);
+            const color = colors[type] || '#F5F5F5';
+            
+            const typeJa = typeTranslations[type] || type;
+
+            // フィルタリング用に data-type 属性を追加
+            pokemonEl.setAttribute('data-type', type);
+
+            pokemonEl.style.backgroundColor = color;
+
+            const imgUrl = pokemon.sprites.other['official-artwork'].front_default;
+
+            const pokemonInnerHTML = `
+                <div class="img-container">
+                    <img src="${imgUrl}" alt="${jaName}">
+                </div>
+                <div class="info">
+                    <span class="number">No.${id}</span>
+                    <h3 class="name">${jaName}</h3>
+                    <small class="type">タイプ: <span>${typeJa}</span></small>
+                </div>
+            `;
+
+            pokemonEl.innerHTML = pokemonInnerHTML;
+            pokeContainer.appendChild(pokemonEl);
+        };
+
+        // 文字検索（変更なし）
+        searchInput.addEventListener('input', (e) => {
+            // 検索時はフィルターの選択状態をリセットする動きもアリですが、
+            // ここでは簡易的に「表示中のものから検索」ではなく「全体から検索」する挙動にします
+            // もし「火タイプの中で検索」したい場合はロジック追加が必要ですが、
+            // 今回は検索バー入力時にすべてのフィルター解除（全表示に戻す）ロジックは入れず、
+            // シンプルにDOMの表示/非表示を切り替えます。
+            
+            const searchValue = e.target.value.toLowerCase();
+            const pokemonCards = document.querySelectorAll('.pokemon');
+
+            // 検索入力時はフィルターボタンの「active」を外すと親切（今回は簡易実装）
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+
+            pokemonCards.forEach(card => {
+                const name = card.querySelector('.name').innerText;
+                const number = card.querySelector('.number').innerText.toLowerCase();
+
+                if (name.includes(searchValue) || number.includes(searchValue)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        fetchPokemons();
+    </script>
+</body>
+</html>
