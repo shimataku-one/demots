@@ -11,6 +11,63 @@
 
     gtag("config", "G-KQ4219WSEK");
   </script>
+  <script>
+  window.addEventListener('load', function() {
+    // 1. 対象のiframeを取得（IDやクラスは適宜変更してください）
+    var iframe = document.querySelector('iframe');
+
+    // iframeが見つからない場合は終了
+    if (!iframe) return;
+
+    // 2. iframeの読み込み完了を待ってから処理を実行
+    iframe.addEventListener('load', function() {
+      try {
+        // iframe内のドキュメントオブジェクトを取得
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+        // 3. 適用したいCSSを作成
+        var style = iframeDoc.createElement('style');
+        style.type = 'text/css';
+        
+        // ここに適用したいCSSを記述します
+        // 例：フォームの背景色を赤、文字色を白にする
+        var cssCode = `
+          form {
+            background-color: #f0f0f0 !important;
+            padding: 20px;
+            border-radius: 8px;
+          }
+          input[type="text"], input[type="email"] {
+            border: 2px solid #007bff;
+            padding: 10px;
+            width: 100%;
+          }
+          button, input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+          }
+        `;
+
+        if (style.styleSheet) {
+          style.styleSheet.cssText = cssCode; // IEなどの古いブラウザ対応
+        } else {
+          style.appendChild(iframeDoc.createTextNode(cssCode));
+        }
+
+        // 4. iframe内の<head>にCSSを追加
+        iframeDoc.head.appendChild(style);
+        console.log('iframe内にCSSを適用しました');
+
+      } catch (e) {
+        // ドメインが異なる場合はここでエラーになります
+        console.error('クロスドメイン制限のため、iframe内のスタイルを変更できません。', e);
+      }
+    });
+  });
+</script>
   <!-- <script src="main.js"></script> -->
   <title>FHtest</title>
   <meta charset="UTF-8" />
