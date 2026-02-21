@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactions SDK 動作確認ページ</title>
+    <style>
+        :root { --primary: #0070d2; --hover: #005fb2; --bg: #f4f6f9; --card-bg: #ffffff; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--bg); color: #333; padding: 20px; line-height: 1.6; }
+        h1, h2 { border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 30px; }
+        
+        /* Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .card { background-color: var(--card-bg); padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); text-align: center; }
+        
+        /* Buttons */
+        button { background-color: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; width: 100%; transition: background-color 0.2s; }
+        button:hover { background-color: var(--hover); }
+        button.danger { background-color: #e52d3d; }
+        button.danger:hover { background-color: #c22734; }
+        button.success { background-color: #2e844a; }
+        button.success:hover { background-color: #246a3b; }
+
+        /* Form Inputs */
+        input { width: calc(100% - 20px); padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+
+        /* Checkout Section (Matching your specific DOM selectors) */
+        .slds-grid { display: flex; gap: 20px; margin-top: 20px; }
+        .slds-size_1-of-3 { width: 33.33%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .slds-size_2-of-3 { width: 66.66%; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        dl { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 5px 0; margin: 0; }
+        dt { font-weight: bold; }
+        dd { margin: 0; }
+    </style>
+</head>
+<body>
+
+    <h1>Interaction SDK Test Dashboard</h1>
+
+    <h2>1. User Identities & Custom Events</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Identity Update</h3>
+            <button id="subBtn">SubBtn (Identity)</button>
+        </div>
+        <div class="card">
+            <h3>Catalog Event</h3>
+            <button id="subBtn2">SubBtn2 (Catalog)</button>
+        </div>
+        <div class="card">
+            <h3>View Catalog + Email</h3>
+            <button id="subBtn3">SubBtn3 (View & Email)</button>
+        </div>
+        <div class="card">
+            <h3>Custom Event</h3>
+            <button id="custBtn">Custom Event</button>
+        </div>
+    </div>
+
+    <h2>2. User Registration</h2>
+    <div class="grid" style="grid-template-columns: 1fr; max-width: 400px;">
+        <div class="card">
+            <input type="text" id="fnameInput" placeholder="First Name" onchange="window.firstname = this.value">
+            <input type="text" id="lnameInput" placeholder="Last Name" onchange="window.lastname = this.value">
+            <input type="email" id="emailInput" placeholder="Email" onchange="window.email = this.value">
+            <input type="tel" id="phoneInput" placeholder="Phone" onchange="window.phonenumber = this.value">
+            <button id="register" class="success">Register User</button>
+        </div>
+    </div>
+
+    <h2>3. Product Catalog (View Catalog Object)</h2>
+    <div class="grid">
+        <div class="card"><h3>Electronics</h3><button id="electronics">View</button></div>
+        <div class="card"><h3>Men's Shoes</h3><button id="mensShoe">View</button></div>
+        <div class="card"><h3>Women's Shoes</h3><button id="womensShoe">View</button></div>
+        <div class="card"><h3>Men's Backpack</h3><button id="mensBackpack">View</button></div>
+        <div class="card"><h3>Women's Backpack</h3><button id="womensBackpack">View</button></div>
+        <div class="card"><h3>Promo 1</h3><button id="promo1">View Promo</button></div>
+        <div class="card"><h3>Promo 2</h3><button id="promo2">View Promo</button></div>
+        <div class="card"><h3>Promo 3</h3><button id="promo3">View Promo</button></div>
+    </div>
+
+    <h2>4. Cart Actions</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Product-1</h3>
+            <button id="addToCart">Add To Cart</button>
+            <button id="remove" class="danger" style="margin-top: 10px;">Remove From Cart</button>
+        </div>
+    </div>
+
+    <h2>5. Checkout (Specific DOM Structure)</h2>
+    <div class="slds-grid">
+        <div class="slds-size_1-of-3 order-summary">
+            <h3>Order Summary</h3>
+            <dl><dt>Subtotal</dt><dd>$100.00</dd></dl>
+            <dl><dt>Tax</dt><dd>$10.00</dd></dl>
+            <dl><dt>Shipping</dt><dd>$0.00</dd></dl>
+            <dl style="background:#f4f6f9; padding: 10px;"><dt>Total</dt><dd>$110.00</dd></dl> 
+        </div>
+
+        <div class="slds-col slds-size_2-of-3 checkout-form">
+            <h3>Checkout Details</h3>
+            <fieldset>
+                <div>
+                    <div><strong>Item Details</strong></div>
+                    <div style="margin-top: 10px; padding: 10px; border: 1px dashed #ccc;">
+                        <dl>
+                            <dt>Target Product ID</dt>
+                            <dd>product-xyz-checkout</dd>
+                        </dl>
+                    </div>
+                </div>
+            </fieldset>
+            <button class="submit-shipping success" style="margin-top: 20px; font-size: 18px;">Submit Order</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.c360a.salesforce.com/beacon/c360a/db1e1700-7530-4234-9062-bf4ae5e9b7fb/scripts/c360a.min.js"></script>
+</body>
+</html>
